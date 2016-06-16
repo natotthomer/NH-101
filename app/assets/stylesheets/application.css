@@ -1,0 +1,45 @@
+/*
+*= require_tree .
+*= require_self
+*/
+
+.synth-key {
+  float: left;
+  width: 50px;
+  height: 200px;
+  border: 1px solid grey;
+  background-color: white;
+  transition: background-color 0.25s;
+}
+
+.synth-key-black {
+  float: left;
+  width: 50px;
+  height: 200px;
+  border: 1px solid grey;
+  background-color: black;
+  transition: background-color 0.25s;
+}
+
+.pressed {
+  background-color: yellow;
+}
+
+.keys {
+  clear: both;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
