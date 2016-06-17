@@ -49,7 +49,7 @@ var Synth = React.createClass({
             );
           }.bind(this))
         }
-        </div>
+        </div><br/>
         <div className="sliders">
           <input
             id='master-volume'

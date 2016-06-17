@@ -3,13 +3,13 @@ var React = require('react'),
     Note = require('../util/note'),
     MORETONES = require('../constants/more_tones');
 
+window.KeyStore = KeyStore;
+var _blah = 0;
 var SynthKey = React.createClass({
   componentDidMount: function () {
     this.makeFullNoteName();
     KeyStore.addListener(this._onChange);
-    this.note = new Note(this.makeNewFreq());
-    console.log(this.props.masterVolume);
-    this.note.masterVol(0.2);
+    // this.note.masterVol(this.props.masterVolume);
   },
 
   makeFullNoteName: function () {
@@ -52,15 +52,24 @@ var SynthKey = React.createClass({
   _onChange: function () {
     var pressed = this.thisKeyPressed();
 
-    if (pressed) {
-      var newNote = new Note(this.makeNewFreq());
-      // var newFreq = MORETONES[this.props.noteName] * Math.pow(2, this.props.currentOctave);
-
-      // this.note.freq(newFreq);
-      this.note = newNote;
-      this.note.start();
-    } else {
+    if (this.note) {
       this.note.stop();
+      // _blah--;
+      // console.log(_blah);
+    }
+    if (pressed) {
+      console.log("PRESSED")
+      // _blah++;
+      // console.log(_blah);
+      this.note = new Note(this.makeNewFreq());
+      this.note.start();
+    } else if (this.note) {
+      console.log("stopping");
+      this.note.stop();
+      // _blah--;
+      // console.log(_blah);
+
+      // this.note = undefined;
     }
     this.setState({ pressed: pressed });
   }

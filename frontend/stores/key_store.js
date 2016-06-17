@@ -26,6 +26,8 @@ KeyStore.__onDispatch = function (payload) {
 KeyStore._addKey = function (key) {
   var idx = _keys.indexOf(key);
   if (idx == -1) {
+    console.log("pushing key")
+    console.log(key);
     _keys.push(key);
     this.__emitChange();
   }
@@ -41,6 +43,15 @@ KeyStore._removeKey = function (key) {
   if (idx != -1) {
     _keys.splice(idx, 1);
     this.__emitChange();
+  }
+};
+
+KeyStore.has = function (keyCode) {
+  var idx = _keys.indexOf(keyCode);
+  if (idx !== -1) {
+    return true;
+  } else {
+    return false;
   }
 };
 

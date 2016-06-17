@@ -3,16 +3,20 @@
 *= require_self
 */
 
-div {
+div, body, p, article, section, h1, a {
   box-sizing: border-box;
 }
 
-
+.header {
+  width: 900px;
+  margin: auto;
+  text-align: center;
+}
 
 .synth {
   width: 900px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -23,6 +27,8 @@ div {
   border: 1px solid grey;
   background-color: white;
   transition: background-color 0.25s;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .synth-key-black {
@@ -33,6 +39,8 @@ div {
   border: 1px solid grey;
   background-color: black;
   transition: background-color 0.25s;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .synth-key-black + .synth-key {
@@ -45,7 +53,8 @@ div {
 
 .keys {
   clear: both;
-  margin: auto;
+  margin-left: 175px;
+  margin-right: 175px;
   text-align: center;
 }
 
@@ -62,4 +71,12 @@ div {
   content: "";
   display: table;
   clear: both;
+}
+
+.description {
+  font-family: sans-serif;
+  font-weight: bold;
+  padding-top: 15px;
+  text-align: center;
+  text-transform: uppercase;
 }
