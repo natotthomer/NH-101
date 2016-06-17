@@ -22,5 +22,13 @@
     "react-dom": "^15.1.0",
     "webpack": "^1.13.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natotthomer/NH101.git"
+  },
+  "bugs": {
+    "url": "https://github.com/natotthomer/NH101/issues"
+  },
+  "homepage": "https://github.com/natotthomer/NH101#readme"
 }

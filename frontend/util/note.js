@@ -76,14 +76,24 @@ Note.prototype = {
     this.sawGain.gain.value = 0.05;
     this.squareGain.gain.value = 0.05;
     this.triangleGain.gain.value = 0.2;
-    this.masterGain.gain.value = 0.25;
   },
 
   stop: function () {
     this.sawGain.gain.value = 0;
     this.squareGain.gain.value = 0;
     this.triangleGain.gain.value = 0;
-  }
+  },
+
+  masterVol: function (newVol) {
+    console.log(newVol);
+    this.masterGain.gain.value = newVol;
+  },
+
+  freq: function (newFreq) {
+    this.sawNode.frequency.value = newFreq;
+    this.triangleNode.frequency.value = newFreq;
+    this.squareNode.frequency.value = newFreq;
+  },
 };
 
 module.exports = Note;

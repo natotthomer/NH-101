@@ -3,10 +3,23 @@
 *= require_self
 */
 
+div {
+  box-sizing: border-box;
+}
+
+
+
+.synth {
+  width: 900px;
+  margin: auto;
+  margin-top: 50px;
+  text-align: center;
+}
+
 .synth-key {
   float: left;
   width: 50px;
-  height: 200px;
+  height: 240px;
   border: 1px solid grey;
   background-color: white;
   transition: background-color 0.25s;
@@ -14,11 +27,16 @@
 
 .synth-key-black {
   float: left;
-  width: 50px;
-  height: 200px;
+  width: 27px;
+  height: 150px;
+  transform: translateX(-50%);
   border: 1px solid grey;
   background-color: black;
   transition: background-color 0.25s;
+}
+
+.synth-key-black + .synth-key {
+  margin-left: -27px;
 }
 
 .pressed {
@@ -27,6 +45,8 @@
 
 .keys {
   clear: both;
+  margin: auto;
+  text-align: center;
 }
 
 .clearfix:after {
