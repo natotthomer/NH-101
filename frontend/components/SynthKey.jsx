@@ -3,13 +3,22 @@ var React = require('react'),
     Note = require('../util/note'),
     MORETONES = require('../constants/more_tones');
 
-window.KeyStore = KeyStore;
-var _blah = 0;
 var SynthKey = React.createClass({
+  getInitialState: function () {
+    return { pressed: this.thisKeyPressed() };
+  },
+
   componentDidMount: function () {
     this.makeFullNoteName();
+    this.note = new Note(this.makeNewFreq(), this.props.masterVolume, 2000);
     KeyStore.addListener(this._onChange);
-    // this.note.masterVol(this.props.masterVolume);
+  },
+
+  componentWillReceiveProps: function (newProps) {
+    var newVol = newProps.masterVolume;
+    var newCutoff = newProps.filterCutoff;
+    this.note.changeMasterVol(newVol);
+    this.note.changeFilterFreq(newCutoff);
   },
 
   makeFullNoteName: function () {
@@ -18,10 +27,6 @@ var SynthKey = React.createClass({
     } else {
       this.fullNoteName = this.props.noteName + this.props.currentOctave;
     }
-  },
-
-  getInitialState: function () {
-    return { pressed: this.thisKeyPressed() };
   },
 
   render: function () {
@@ -54,22 +59,19 @@ var SynthKey = React.createClass({
 
     if (this.note) {
       this.note.stop();
-      // _blah--;
-      // console.log(_blah);
     }
     if (pressed) {
       console.log("PRESSED")
-      // _blah++;
-      // console.log(_blah);
-      this.note = new Note(this.makeNewFreq());
-      this.note.start();
+      this.note = new Note(this.makeNewFreq(),
+        this.props.masterVolume,
+        this.props.filterCutoff,
+        this.props.Q
+      );
+      this.note.start(this.props.masterVolume);
     } else if (this.note) {
       console.log("stopping");
       this.note.stop();
-      // _blah--;
-      // console.log(_blah);
 
-      // this.note = undefined;
     }
     this.setState({ pressed: pressed });
   }

@@ -10,6 +10,7 @@ var Synth = React.createClass({
     document.addEventListener("keypress", this.changeOctave);
     this.currentOctave = 4;
     this.startingVolume = 0.2;
+    this.startingCutoff = 2000;
     this.masterVolumeSlider = document.getElementById('master-volume');
     this.masterVolumeSlider.addEventListener('click', this.changeVolume);
   },
@@ -22,17 +23,28 @@ var Synth = React.createClass({
     }
   },
 
-  changeVolume: function (e) {
-    return this.masterVolumeSlider.value
+  handleMasterVolChange: function (e) {
+    this.setState({ masterVolume: e.target.value });
+  },
+
+  handleFilterCutoff: function (e) {
+    this.setState({ filterCutoff: e.target.value });
   },
 
   getInitialState: function () {
-    return { notes: KeyStore.all(), currentOctave: 4, masterVolume: this.startingVolume };
+    return {
+      notes: KeyStore.all(),
+      currentOctave: 4,
+      masterVolume: 0.2,
+      filterCutoff: 2000
+    };
   },
 
   render: function () {
     console.log(KeyStore.all());
     var noteName;
+    var vol = this.state.masterVolume;
+    var cutoff = this.state.filterCutoff;
     return (
       <div className="synth">
         <div className="keys group">
@@ -45,20 +57,33 @@ var Synth = React.createClass({
                 key={index}
                 keyCode={keyCode}
                 currentOctave={this.state.currentOctave}
-                masterVolume={this.state.masterVolume}/>
+                masterVolume={vol}
+                filterCutoff={cutoff}/>
             );
           }.bind(this))
         }
         </div><br/>
         <div className="sliders">
-          <input
-            id='master-volume'
-            type="range"
-            min="0"
-            max="1"
-            step="0.05"
-            defaultValue={this.startingVolume}
-            onChange={this.volumeChange}/>
+          <label>Master Volume:
+            <input
+              id='master-volume'
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              defaultValue={this.startingVolume}
+              onChange={this.handleMasterVolChange}/>
+          </label><br/>
+          <label>Filter Cutoff:
+            <input
+              id='filter-cutoff'
+              type="range"
+              min="0"
+              max="15000"
+              step="250"
+              defaultValue={this.startingCutoff}
+              onChange={this.handleFilterCutoff}/>
+          </label>
         </div>
       </div>
    );
