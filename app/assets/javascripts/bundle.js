@@ -27356,7 +27356,7 @@
 	var createSawOscillator = function (freq) {
 	  var osc = ctx.createOscillator();
 	  osc.type = "sawtooth";
-	  osc.frequency.value = freq;
+	  osc.frequency.value = freq * 1.01;
 	  osc.detune.value = 0;
 	  osc.start();
 	  return osc;
@@ -27365,7 +27365,7 @@
 	var createSquareOscillator = function (freq) {
 	  var osc = ctx.createOscillator();
 	  osc.type = "square";
-	  osc.frequency.value = freq;
+	  osc.frequency.value = freq * 0.99;
 	  osc.detune.value = 0;
 	  osc.start();
 	  return osc;

@@ -3,7 +3,7 @@ var ctx = new (window.AudioContext || window.webkitAudioContext)();
 var createSawOscillator = function (freq) {
   var osc = ctx.createOscillator();
   osc.type = "sawtooth";
-  osc.frequency.value = freq;
+  osc.frequency.value = freq * 1.01;
   osc.detune.value = 0;
   osc.start();
   return osc;
@@ -12,7 +12,7 @@ var createSawOscillator = function (freq) {
 var createSquareOscillator = function (freq) {
   var osc = ctx.createOscillator();
   osc.type = "square";
-  osc.frequency.value = freq;
+  osc.frequency.value = freq * 0.99;
   osc.detune.value = 0;
   osc.start();
   return osc;
@@ -85,7 +85,7 @@ var Note = function (freq) {
 };
 
 Note.prototype = {
-  start: function () {
+  start: function (startVol) {
     this.sawGain.gain.value = 0.05;
     this.squareGain.gain.value = 0.05;
     this.triangleGain.gain.value = 0.2;
@@ -100,13 +100,17 @@ Note.prototype = {
     this.masterGain.gain.value = 0;
     this.squareGain.gain.value = 0;
     this.triangleGain.gain.value = 0;
+    this.
   },
 
-  freq: function (newFreq) {
-    this.sawNode.frequency.value = newFreq;
-    this.triangleNode.frequency.value = newFreq;
-    this.squareNode.frequency.value = newFreq;
+  changeMasterVol: function (newVol) {
+    // this.sawNode.frequency.value = newFreq;
+    // this.triangleNode.frequency.value = newFreq;
+    // this.squareNode.frequency.value = newFreq;
+    this.masterGain.gain.value = newVol;
   },
+
+
 };
 
 module.exports = Note;

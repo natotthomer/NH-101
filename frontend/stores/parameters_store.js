@@ -8,4 +8,6 @@ ParametersStore.all = function () {
   return _parameters.slice(0);
 };
 
-ParametersStore._addParameter = function (payload) {}
+ParametersStore._addParameter = function (payload) {
+  
+}

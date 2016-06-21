@@ -38,7 +38,7 @@ div, body, p, article, section, h1, a {
   transform: translateX(-50%);
   border: 1px solid grey;
   background-color: black;
-  transition: background-color 0.25s;
+  transition: background-color 0.15s;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
@@ -48,7 +48,7 @@ div, body, p, article, section, h1, a {
 }
 
 .pressed {
-  background-color: yellow;
+  background-color: purple;
 }
 
 .keys {
