@@ -20365,6 +20365,11 @@
 	    document.addEventListener("keypress", this.changeOctave);
 	    this.currentOctave = 4;
 	    this.startingVolume = 0.2;
+	    this.startingCutoff = 2000;
+	    this.startingResonance = 0.1;
+	    this.startingSawVol = 0.2;
+	    this.startingSquareVol = 0.2;
+	    this.startingTriVol = 0.2;
 	    this.masterVolumeSlider = document.getElementById('master-volume');
 	    this.masterVolumeSlider.addEventListener('click', this.changeVolume);
 	  },
@@ -20372,22 +20377,57 @@
 	  changeOctave: function (e) {
 	    if (e.key === "z" && this.state.currentOctave !== 0) {
 	      this.setState({ currentOctave: this.state.currentOctave - 1 });
-	    } else if (e.key === "x" && this.state.currentOctave !== 7) {
+	    } else if (e.key === "x" && this.state.currentOctave !== 9) {
 	      this.setState({ currentOctave: this.state.currentOctave + 1 });
 	    }
 	  },
 	
-	  changeVolume: function (e) {
-	    return this.masterVolumeSlider.value;
+	  handleMasterVolChange: function (e) {
+	    this.setState({ masterVolume: e.target.value });
+	  },
+	
+	  handleFilterCutoff: function (e) {
+	    this.setState({ filterCutoff: e.target.value });
+	  },
+	
+	  handleFilterResonance: function (e) {
+	    this.setState({ Q: e.target.value });
+	  },
+	
+	  handleSawVolChange: function (e) {
+	    this.setState({ sawVol: e.target.value });
+	  },
+	
+	  handleSquareVolChange: function (e) {
+	    this.setState({ squareVol: e.target.value });
+	  },
+	
+	  handleTriVolChange: function (e) {
+	    this.setState({ triVol: e.target.value });
 	  },
 	
 	  getInitialState: function () {
-	    return { notes: KeyStore.all(), currentOctave: 4, masterVolume: this.startingVolume };
+	    return {
+	      notes: KeyStore.all(),
+	      currentOctave: 4,
+	      masterVolume: 0.2,
+	      filterCutoff: 2000,
+	      Q: 0,
+	      sawVol: 0.2,
+	      squareVol: 0.2,
+	      triVol: 0.2
+	    };
 	  },
 	
 	  render: function () {
 	    console.log(KeyStore.all());
 	    var noteName;
+	    var vol = this.state.masterVolume;
+	    var cutoff = this.state.filterCutoff;
+	    var Q = this.state.Q;
+	    var sawVol = this.state.sawVol;
+	    var squareVol = this.state.squareVol;
+	    var triVol = this.state.triVol;
 	    return React.createElement(
 	      'div',
 	      { className: 'synth' },
@@ -20401,21 +20441,101 @@
 	            key: index,
 	            keyCode: keyCode,
 	            currentOctave: this.state.currentOctave,
-	            masterVolume: this.state.masterVolume });
+	            masterVolume: vol,
+	            filterCutoff: cutoff,
+	            Q: Q,
+	            sawVol: sawVol,
+	            squareVol: squareVol,
+	            triVol: triVol });
 	        }.bind(this))
 	      ),
 	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
 	        { className: 'sliders' },
-	        React.createElement('input', {
-	          id: 'master-volume',
-	          type: 'range',
-	          min: '0',
-	          max: '1',
-	          step: '0.05',
-	          defaultValue: this.startingVolume,
-	          onChange: this.volumeChange })
+	        React.createElement(
+	          'label',
+	          null,
+	          'Master Volume:',
+	          React.createElement('input', {
+	            id: 'master-volume',
+	            type: 'range',
+	            min: '0',
+	            max: '1',
+	            step: '0.01',
+	            defaultValue: '0.2',
+	            onChange: this.handleMasterVolChange })
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'label',
+	          null,
+	          'Filter Cutoff:',
+	          React.createElement('input', {
+	            id: 'filter-cutoff',
+	            type: 'range',
+	            min: '0',
+	            max: '15000',
+	            step: '250',
+	            defaultValue: '2000',
+	            onChange: this.handleFilterCutoff })
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'label',
+	          null,
+	          'Filter Resonance:',
+	          React.createElement('input', {
+	            id: 'filter-resonance',
+	            type: 'range',
+	            min: '0.1',
+	            max: '40',
+	            step: '.1',
+	            defaultValue: '0',
+	            onChange: this.handleFilterResonance })
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'label',
+	          null,
+	          'Saw Volume:',
+	          React.createElement('input', {
+	            id: 'saw-vol',
+	            type: 'range',
+	            min: '0',
+	            max: '1',
+	            step: '.001',
+	            defaultValue: '0.2',
+	            onChange: this.handleSawVolChange })
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'label',
+	          null,
+	          'Square Volume:',
+	          React.createElement('input', {
+	            id: 'square-vol',
+	            type: 'range',
+	            min: '0',
+	            max: '1',
+	            step: '.001',
+	            defaultValue: '0.2',
+	            onChange: this.handleSquareVolChange })
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'label',
+	          null,
+	          'Triangle Volume:',
+	          React.createElement('input', {
+	            id: 'tri-vol',
+	            type: 'range',
+	            min: '0',
+	            max: '1',
+	            step: '.001',
+	            defaultValue: '0.2',
+	            onChange: this.handleTriVolChange })
+	        )
 	      )
 	    );
 	  },
@@ -20434,18 +20554,35 @@
 
 	var React = __webpack_require__(1),
 	    KeyStore = __webpack_require__(170),
-	    Note = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../util/note\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())),
+	    Note = __webpack_require__(201),
 	    MORETONES = __webpack_require__(202);
 	
-	window.KeyStore = KeyStore;
-	var _blah = 0;
 	var SynthKey = React.createClass({
 	  displayName: 'SynthKey',
 	
+	  getInitialState: function () {
+	    return { pressed: this.thisKeyPressed() };
+	  },
+	
 	  componentDidMount: function () {
 	    this.makeFullNoteName();
+	    this.note = new Note(this.makeNewFreq(), this.props.masterVolume, this.props.filterCutoff, this.props.Q);
 	    KeyStore.addListener(this._onChange);
-	    // this.note.masterVol(this.props.masterVolume);
+	  },
+	
+	  componentWillReceiveProps: function (newProps) {
+	    var newVol = newProps.masterVolume;
+	    var newCutoff = newProps.filterCutoff;
+	    var newQ = newProps.Q;
+	    var newSawVol = newProps.sawVol;
+	    var newSquareVol = newProps.squareVol;
+	    var newTriVol = newProps.triVol;
+	    this.note.changeMasterVol(newVol);
+	    this.note.changeFilterFreq(newCutoff);
+	    this.note.changeResonance(newQ);
+	    this.note.changeSawVol(newSawVol);
+	    this.note.changeSquareVol(newSquareVol);
+	    this.note.changeTriVol(newTriVol);
 	  },
 	
 	  makeFullNoteName: function () {
@@ -20454,10 +20591,6 @@
 	    } else {
 	      this.fullNoteName = this.props.noteName + this.props.currentOctave;
 	    }
-	  },
-	
-	  getInitialState: function () {
-	    return { pressed: this.thisKeyPressed() };
 	  },
 	
 	  render: function () {
@@ -20490,22 +20623,14 @@
 	
 	    if (this.note) {
 	      this.note.stop();
-	      // _blah--;
-	      // console.log(_blah);
 	    }
 	    if (pressed) {
 	      console.log("PRESSED");
-	      // _blah++;
-	      // console.log(_blah);
-	      this.note = new Note(this.makeNewFreq());
-	      this.note.start();
+	      this.note = new Note(this.makeNewFreq(), this.props.masterVolume, this.props.filterCutoff, this.props.Q);
+	      this.note.start(this.props.masterVolume, this.props.sawVol, this.props.squareVol, this.props.triVol);
 	    } else if (this.note) {
 	      console.log("stopping");
 	      this.note.stop();
-	      // _blah--;
-	      // console.log(_blah);
-	
-	      // this.note = undefined;
 	    }
 	    this.setState({ pressed: pressed });
 	  }
@@ -37235,7 +37360,6 @@
 	    KeyStore = __webpack_require__(170);
 	
 	$(function () {
-	
 	  $(document).on('keydown', function (e) {
 	    var code = e.keyCode;
 	
@@ -37379,7 +37503,19 @@
 	  D7: 2349.32,
 	  Eb7: 2489.02,
 	  E7: 2637.02,
-	  F7: 2793.83
+	  F7: 2793.83,
+	  Gb7: 2959.96,
+	  G7: 3135.96,
+	  Ab7: 3322.44,
+	  A7: 3520.00,
+	  Bb7: 3729.31,
+	  B7: 3951.07,
+	  C8: 4186.01,
+	  Db8: 4434.92,
+	  D8: 4698.63,
+	  Eb8: 4978.03,
+	  E8: 5274.04,
+	  F8: 5587.65
 	};
 	
 	module.exports = TONES;
@@ -37434,7 +37570,136 @@
 	module.exports = RevKeyMapping;
 
 /***/ },
-/* 201 */,
+/* 201 */
+/***/ function(module, exports) {
+
+	var ctx = new (window.AudioContext || window.webkitAudioContext)();
+	
+	var createSawOscillator = function (freq) {
+	  var osc = ctx.createOscillator();
+	  osc.type = "sawtooth";
+	  osc.frequency.value = freq * 1.01;
+	  osc.detune.value = 0;
+	  osc.start();
+	  return osc;
+	};
+	
+	var createSawGainNode = function () {
+	  var gainNode = ctx.createGain();
+	  gainNode.gain.value = 0;
+	  return gainNode;
+	};
+	
+	var createSquareOscillator = function (freq) {
+	  var osc = ctx.createOscillator();
+	  osc.type = "square";
+	  osc.frequency.value = freq * 0.99;
+	  osc.detune.value = 0;
+	  osc.start();
+	  return osc;
+	};
+	
+	var createSquareGainNode = function () {
+	  var gainNode = ctx.createGain();
+	  gainNode.gain.value = 0;
+	  return gainNode;
+	};
+	
+	var createTriOscillator = function (freq) {
+	  var osc = ctx.createOscillator();
+	  osc.type = "square";
+	  osc.frequency.value = freq * 1.0;
+	  osc.detune.value = 0;
+	  osc.start();
+	  return osc;
+	};
+	
+	var createTriGainNode = function () {
+	  var gainNode = ctx.createGain();
+	  gainNode.gain.value = 0;
+	  return gainNode;
+	};
+	
+	var createLowpassFilter = function (cutoff, Q) {
+	  var lowpassFilter = ctx.createBiquadFilter();
+	  lowpassFilter.type = 'lowpass';
+	  lowpassFilter.gain.value = 1;
+	  lowpassFilter.frequency.value = cutoff;
+	  lowpassFilter.Q.value = Q;
+	  return lowpassFilter;
+	};
+	
+	var createMasterGainNode = function () {
+	  var gainNode = ctx.createGain();
+	  gainNode.gain.value = 0.2;
+	  gainNode.connect(ctx.destination);
+	  return gainNode;
+	};
+	
+	var Note = function (freq, vol, cutoff, Q) {
+	  this.masterGain = createMasterGainNode();
+	  this.masterGain.gain.value = vol;
+	  this.lowpassFilter = createLowpassFilter(cutoff, Q);
+	  this.lowpassFilter.connect(this.masterGain);
+	
+	  this.sawNode = createSawOscillator(freq);
+	  this.sawGain = createSawGainNode();
+	  this.sawGain.connect(this.lowpassFilter);
+	  this.sawNode.connect(this.sawGain);
+	
+	  this.squareNode = createSquareOscillator(freq);
+	  this.squareGain = createSquareGainNode();
+	  this.squareGain.connect(this.lowpassFilter);
+	  this.squareNode.connect(this.squareGain);
+	
+	  this.triNode = createTriOscillator(freq);
+	  this.triGain = createTriGainNode();
+	  this.triGain.connect(this.lowpassFilter);
+	  this.triNode.connect(this.triGain);
+	};
+	
+	Note.prototype = {
+	  start: function (startVol, sawVol, squareVol, triVol) {
+	    this.sawGain.gain.value = sawVol;
+	    this.squareGain.gain.value = squareVol;
+	    this.triGain.gain.value = triVol;
+	    this.masterGain.gain.value = startVol;
+	  },
+	
+	  stop: function () {
+	    this.sawNode.stop();
+	    this.squareNode.stop();
+	    this.triNode.stop();
+	  },
+	
+	  changeMasterVol: function (newVol) {
+	    this.masterGain.gain.value = newVol;
+	  },
+	
+	  changeFilterFreq: function (newFreq) {
+	    this.lowpassFilter.frequency.value = newFreq;
+	  },
+	
+	  changeResonance: function (newRes) {
+	    this.lowpassFilter.Q.value = newRes;
+	  },
+	
+	  changeSawVol: function (newSawVol) {
+	    this.sawGain.gain.value = newSawVol;
+	  },
+	
+	  changeSquareVol: function (newSquareVol) {
+	    this.squareGain.gain.value = newSquareVol;
+	  },
+	
+	  changeTriVol: function (newTriVol) {
+	    this.triGain.gain.value = newTriVol;
+	  }
+	};
+	
+	module.exports = Note;
+
+/***/ },
 /* 202 */
 /***/ function(module, exports) {
 

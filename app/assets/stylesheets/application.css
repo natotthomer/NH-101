@@ -7,6 +7,22 @@ div, body, p, article, section, h1, a {
   box-sizing: border-box;
 }
 
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+
+body {
+
+}
+
 .header {
   width: 900px;
   margin: auto;
@@ -16,15 +32,18 @@ div, body, p, article, section, h1, a {
 .synth {
   width: 900px;
   margin: auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
   margin-top: 40px;
   text-align: center;
+  background: #999998;
 }
 
 .synth-key {
   float: left;
   width: 50px;
   height: 240px;
-  border: 1px solid grey;
+  border: 1px solid #555555;
   background-color: white;
   transition: background-color 0.25s;
   border-bottom-right-radius: 5px;
@@ -36,7 +55,7 @@ div, body, p, article, section, h1, a {
   width: 27px;
   height: 150px;
   transform: translateX(-50%);
-  border: 1px solid grey;
+  border: 1px solid #555555;
   background-color: black;
   transition: background-color 0.15s;
   border-bottom-right-radius: 5px;
@@ -48,7 +67,7 @@ div, body, p, article, section, h1, a {
 }
 
 .pressed {
-  background-color: purple;
+  background-color: #007ced;
 }
 
 .keys {

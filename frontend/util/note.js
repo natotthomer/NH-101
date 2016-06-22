@@ -9,6 +9,12 @@ var createSawOscillator = function (freq) {
   return osc;
 };
 
+var createSawGainNode = function () {
+  var gainNode = ctx.createGain();
+  gainNode.gain.value = 0;
+  return gainNode;
+};
+
 var createSquareOscillator = function (freq) {
   var osc = ctx.createOscillator();
   osc.type = "square";
@@ -18,99 +24,102 @@ var createSquareOscillator = function (freq) {
   return osc;
 };
 
-var createTriangleOscillator = function (freq) {
-  var osc = ctx.createOscillator();
-  osc.type = "triangle";
-  osc.frequency.value = freq;
-  osc.detune.value = 0;
-  osc.start();
-  return osc;
-};
-
-var createSawGainNode = function () {
-  var gainNode = ctx.createGain();
-  gainNode.gain.value = 0;
-  return gainNode;
-};
-
 var createSquareGainNode = function () {
   var gainNode = ctx.createGain();
   gainNode.gain.value = 0;
   return gainNode;
 };
 
-var createTriangleGainNode = function () {
+var createTriOscillator = function (freq) {
+  var osc = ctx.createOscillator();
+  osc.type = "square";
+  osc.frequency.value = freq * 1.0;
+  osc.detune.value = 0;
+  osc.start();
+  return osc;
+};
+
+var createTriGainNode = function () {
   var gainNode = ctx.createGain();
   gainNode.gain.value = 0;
   return gainNode;
+};
+
+var createLowpassFilter = function (cutoff, Q) {
+  var lowpassFilter = ctx.createBiquadFilter();
+  lowpassFilter.type = 'lowpass';
+  lowpassFilter.gain.value = 1;
+  lowpassFilter.frequency.value = cutoff;
+  lowpassFilter.Q.value = Q;
+  return lowpassFilter;
 };
 
 var createMasterGainNode = function () {
   var gainNode = ctx.createGain();
-  gainNode.gain.value = 0;
+  gainNode.gain.value = 0.2;
   gainNode.connect(ctx.destination);
   return gainNode;
 };
 
-// var createLowpassFilter = function () {
-//   var lowpassFilter = ctx.createBiquadFilter();
-//   console.log(lowpassFilter);
-//   lowpassFilter.type = 'lowpass';
-//   // lowpassFilter.frequency.value = 4000;
-// };
-
-var Note = function (freq) {
+var Note = function (freq, vol, cutoff, Q) {
   this.masterGain = createMasterGainNode();
-  // this.lowpassFilter = createLowpassFilter();
+  this.masterGain.gain.value = vol;
+  this.lowpassFilter = createLowpassFilter(cutoff, Q);
+  this.lowpassFilter.connect(this.masterGain);
 
   this.sawNode = createSawOscillator(freq);
   this.sawGain = createSawGainNode();
-  // this.sawGain.connect(this.lowpassFilter);
-  this.sawGain.connect(this.masterGain);
+  this.sawGain.connect(this.lowpassFilter);
   this.sawNode.connect(this.sawGain);
 
   this.squareNode = createSquareOscillator(freq);
   this.squareGain = createSquareGainNode();
-  // this.squareGain.connect(this.lowpassFilter);
-  this.squareGain.connect(this.masterGain);
+  this.squareGain.connect(this.lowpassFilter);
   this.squareNode.connect(this.squareGain);
 
-  this.triangleNode = createTriangleOscillator(freq);
-  this.triangleGain = createTriangleGainNode();
-  // this.triangleGain.connect(this.lowpassFilter);
-  this.triangleGain.connect(this.masterGain);
-  this.triangleNode.connect(this.triangleGain);
-
-  // this.lowpassFilter.connect(this.masterGain);
+  this.triNode = createTriOscillator(freq);
+  this.triGain = createTriGainNode();
+  this.triGain.connect(this.lowpassFilter);
+  this.triNode.connect(this.triGain);
 };
 
 Note.prototype = {
-  start: function (startVol) {
-    this.sawGain.gain.value = 0.05;
-    this.squareGain.gain.value = 0.05;
-    this.triangleGain.gain.value = 0.2;
-    this.masterGain.gain.value = 0.2;
+  start: function (startVol, sawVol, squareVol, triVol) {
+    this.sawGain.gain.value = sawVol;
+    this.squareGain.gain.value = squareVol;
+    this.triGain.gain.value = triVol;
+    this.masterGain.gain.value = startVol;
   },
 
   stop: function () {
-    this.sawNode.stop()
-    this.triangleNode.stop()
-    this.squareNode.stop()
-
-    this.masterGain.gain.value = 0;
-    this.squareGain.gain.value = 0;
-    this.triangleGain.gain.value = 0;
-    this.
+    this.sawNode.stop();
+    this.squareNode.stop();
+    this.triNode.stop();
   },
 
   changeMasterVol: function (newVol) {
-    // this.sawNode.frequency.value = newFreq;
-    // this.triangleNode.frequency.value = newFreq;
-    // this.squareNode.frequency.value = newFreq;
     this.masterGain.gain.value = newVol;
   },
 
+  changeFilterFreq: function (newFreq) {
+    this.lowpassFilter.frequency.value = newFreq;
+  },
 
+  changeResonance: function (newRes) {
+    this.lowpassFilter.Q.value = newRes;
+  },
+
+  changeSawVol: function (newSawVol) {
+    this.sawGain.gain.value = newSawVol;
+  },
+
+  changeSquareVol: function (newSquareVol) {
+    this.squareGain.gain.value = newSquareVol;
+  },
+
+  changeTriVol: function (newTriVol) {
+    this.triGain.gain.value = newTriVol;
+  }
 };
 
 module.exports = Note;

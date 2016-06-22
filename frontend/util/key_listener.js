@@ -6,8 +6,6 @@ var $ = require('jquery'),
     KeyStore = require('../stores/key_store');
 
 $(function () {
-
-
   $(document).on('keydown', function (e) {
     var code = e.keyCode;
 
