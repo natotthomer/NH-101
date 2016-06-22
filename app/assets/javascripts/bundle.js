@@ -20364,12 +20364,6 @@
 	    KeyStore.addListener(this._onChange);
 	    document.addEventListener("keypress", this.changeOctave);
 	    this.currentOctave = 4;
-	    this.startingVolume = 0.2;
-	    this.startingCutoff = 2000;
-	    this.startingResonance = 0.1;
-	    this.startingSawVol = 0.2;
-	    this.startingSquareVol = 0.2;
-	    this.startingTriVol = 0.2;
 	    this.masterVolumeSlider = document.getElementById('master-volume');
 	    this.masterVolumeSlider.addEventListener('click', this.changeVolume);
 	  },
@@ -20622,6 +20616,7 @@
 	    var pressed = this.thisKeyPressed();
 	
 	    if (this.note) {
+	      // this.note.start(0,0,0,0);
 	      this.note.stop();
 	    }
 	    if (pressed) {
@@ -37580,7 +37575,7 @@
 	  osc.type = "sawtooth";
 	  osc.frequency.value = freq * 1.01;
 	  osc.detune.value = 0;
-	  osc.start();
+	  // osc.start();
 	  return osc;
 	};
 	
@@ -37595,7 +37590,7 @@
 	  osc.type = "square";
 	  osc.frequency.value = freq * 0.99;
 	  osc.detune.value = 0;
-	  osc.start();
+	  // osc.start();
 	  return osc;
 	};
 	
@@ -37610,7 +37605,7 @@
 	  osc.type = "square";
 	  osc.frequency.value = freq * 1.0;
 	  osc.detune.value = 0;
-	  osc.start();
+	  // osc.start();
 	  return osc;
 	};
 	
@@ -37656,6 +37651,10 @@
 	  this.triGain = createTriGainNode();
 	  this.triGain.connect(this.lowpassFilter);
 	  this.triNode.connect(this.triGain);
+	
+	  this.sawNode.start();
+	  this.squareNode.start();
+	  this.triNode.start();
 	};
 	
 	Note.prototype = {

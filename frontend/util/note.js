@@ -5,7 +5,7 @@ var createSawOscillator = function (freq) {
   osc.type = "sawtooth";
   osc.frequency.value = freq * 1.01;
   osc.detune.value = 0;
-  osc.start();
+  // osc.start();
   return osc;
 };
 
@@ -20,7 +20,7 @@ var createSquareOscillator = function (freq) {
   osc.type = "square";
   osc.frequency.value = freq * 0.99;
   osc.detune.value = 0;
-  osc.start();
+  // osc.start();
   return osc;
 };
 
@@ -35,7 +35,7 @@ var createTriOscillator = function (freq) {
   osc.type = "square";
   osc.frequency.value = freq * 1.0;
   osc.detune.value = 0;
-  osc.start();
+  // osc.start();
   return osc;
 };
 
@@ -81,6 +81,10 @@ var Note = function (freq, vol, cutoff, Q) {
   this.triGain = createTriGainNode();
   this.triGain.connect(this.lowpassFilter);
   this.triNode.connect(this.triGain);
+
+  this.sawNode.start();
+  this.squareNode.start();
+  this.triNode.start();
 };
 
 Note.prototype = {

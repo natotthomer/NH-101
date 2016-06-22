@@ -70,6 +70,7 @@ var SynthKey = React.createClass({
     var pressed = this.thisKeyPressed();
 
     if (this.note) {
+      // this.note.start(0,0,0,0);
       this.note.stop();
     }
     if (pressed) {

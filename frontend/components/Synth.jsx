@@ -9,12 +9,6 @@ var Synth = React.createClass({
     KeyStore.addListener(this._onChange);
     document.addEventListener("keypress", this.changeOctave);
     this.currentOctave = 4;
-    this.startingVolume = 0.2;
-    this.startingCutoff = 2000;
-    this.startingResonance = 0.1;
-    this.startingSawVol = 0.2;
-    this.startingSquareVol = 0.2;
-    this.startingTriVol = 0.2;
     this.masterVolumeSlider = document.getElementById('master-volume');
     this.masterVolumeSlider.addEventListener('click', this.changeVolume);
   },
