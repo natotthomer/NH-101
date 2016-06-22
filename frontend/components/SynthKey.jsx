@@ -10,15 +10,27 @@ var SynthKey = React.createClass({
 
   componentDidMount: function () {
     this.makeFullNoteName();
-    this.note = new Note(this.makeNewFreq(), this.props.masterVolume, 2000);
+    this.note = new Note(this.makeNewFreq(),
+      this.props.masterVolume,
+      this.props.filterCutoff,
+      this.props.Q
+    );
     KeyStore.addListener(this._onChange);
   },
 
   componentWillReceiveProps: function (newProps) {
     var newVol = newProps.masterVolume;
     var newCutoff = newProps.filterCutoff;
+    var newQ = newProps.Q;
+    var newSawVol = newProps.sawVol;
+    var newSquareVol = newProps.squareVol;
+    var newTriVol = newProps.triVol;
     this.note.changeMasterVol(newVol);
     this.note.changeFilterFreq(newCutoff);
+    this.note.changeResonance(newQ);
+    this.note.changeSawVol(newSawVol);
+    this.note.changeSquareVol(newSquareVol);
+    this.note.changeTriVol(newTriVol);
   },
 
   makeFullNoteName: function () {
@@ -67,11 +79,10 @@ var SynthKey = React.createClass({
         this.props.filterCutoff,
         this.props.Q
       );
-      this.note.start(this.props.masterVolume);
+      this.note.start(this.props.masterVolume, this.props.sawVol, this.props.squareVol, this.props.triVol);
     } else if (this.note) {
       console.log("stopping");
       this.note.stop();
-
     }
     this.setState({ pressed: pressed });
   }

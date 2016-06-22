@@ -7,6 +7,10 @@ div, body, p, article, section, h1, a {
   box-sizing: border-box;
 }
 
+body {
+
+}
+
 .header {
   width: 900px;
   margin: auto;
@@ -16,15 +20,18 @@ div, body, p, article, section, h1, a {
 .synth {
   width: 900px;
   margin: auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
   margin-top: 40px;
   text-align: center;
+  background: #999998;
 }
 
 .synth-key {
   float: left;
   width: 50px;
   height: 240px;
-  border: 1px solid grey;
+  border: 1px solid #555555;
   background-color: white;
   transition: background-color 0.25s;
   border-bottom-right-radius: 5px;
@@ -36,7 +43,7 @@ div, body, p, article, section, h1, a {
   width: 27px;
   height: 150px;
   transform: translateX(-50%);
-  border: 1px solid grey;
+  border: 1px solid #555555;
   background-color: black;
   transition: background-color 0.15s;
   border-bottom-right-radius: 5px;
@@ -48,7 +55,7 @@ div, body, p, article, section, h1, a {
 }
 
 .pressed {
-  background-color: purple;
+  background-color: #007ced;
 }
 
 .keys {
