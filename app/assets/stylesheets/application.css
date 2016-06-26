@@ -5,10 +5,16 @@
 
 div, body, p, article, section, h1, a {
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 body {
+  font-family: sans-serif;
+  color: #000000;
+}
 
+.main {
+  background: #999998;
 }
 
 .header {
@@ -25,6 +31,7 @@ body {
   margin-top: 40px;
   text-align: center;
   background: #999998;
+
 }
 
 .synth-key {
@@ -55,7 +62,7 @@ body {
 }
 
 .pressed {
-  background-color: #007ced;
+  background-color: #001fa2;
 }
 
 .keys {
@@ -86,4 +93,35 @@ body {
   padding-top: 15px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.instructions {
+  width: 900px;
+  height: 200px;
+  margin: auto;
+  background: #999998;
+}
+
+.img-holder {
+  padding: 10px;
+  padding-left: 98px;
+}
+
+.instructions-img {
+  /*-webkit-border-image: -webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00)) 21 30 30 21 repeat repeat;*/
+  border: 2px solid #ffffff;
+  box-shadow: 15px #999998;
+  width: 700px;
+  margin: auto;
+  border-radius: 8px;
+  /*height: 100%;*/
+}
+
+.personal-details {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.personal-details a:hover {
+  text-decoration: underline;
 }
