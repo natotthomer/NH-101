@@ -20364,14 +20364,12 @@
 	    KeyStore.addListener(this._onChange);
 	    document.addEventListener("keypress", this.changeOctave);
 	    this.currentOctave = 4;
-	    this.masterVolumeSlider = document.getElementById('master-volume');
-	    this.masterVolumeSlider.addEventListener('click', this.changeVolume);
 	  },
 	
 	  changeOctave: function (e) {
 	    if (e.key === "z" && this.state.currentOctave !== 0) {
 	      this.setState({ currentOctave: this.state.currentOctave - 1 });
-	    } else if (e.key === "x" && this.state.currentOctave !== 9) {
+	    } else if (e.key === "x" && this.state.currentOctave !== 7) {
 	      this.setState({ currentOctave: this.state.currentOctave + 1 });
 	    }
 	  },
@@ -20400,6 +20398,10 @@
 	    this.setState({ triVol: e.target.value });
 	  },
 	
+	  handleFilterLFOAmountChange: function (e) {
+	    this.setState({ filterLFOAmount: e.target.value });
+	  },
+	
 	  getInitialState: function () {
 	    return {
 	      notes: KeyStore.all(),
@@ -20409,12 +20411,12 @@
 	      Q: 0,
 	      sawVol: 0.2,
 	      squareVol: 0.2,
-	      triVol: 0.2
+	      triVol: 0.2,
+	      filterLFOAmount: 0
 	    };
 	  },
 	
 	  render: function () {
-	    console.log(KeyStore.all());
 	    var noteName;
 	    var vol = this.state.masterVolume;
 	    var cutoff = this.state.filterCutoff;
@@ -20422,121 +20424,198 @@
 	    var sawVol = this.state.sawVol;
 	    var squareVol = this.state.squareVol;
 	    var triVol = this.state.triVol;
+	    var filterLFOAmount = this.state.filterLFOAmount;
 	    return React.createElement(
 	      'div',
-	      { className: 'synth' },
+	      { className: 'main' },
 	      React.createElement(
 	        'div',
-	        { className: 'keys group' },
-	        KeyCodes.map(function (keyCode, index) {
-	          noteName = FullKeyMapping[keyCode][this.state.currentOctave].slice(0, -1);
-	          return React.createElement(SynthKey, {
-	            noteName: noteName,
-	            key: index,
-	            keyCode: keyCode,
-	            currentOctave: this.state.currentOctave,
-	            masterVolume: vol,
-	            filterCutoff: cutoff,
-	            Q: Q,
-	            sawVol: sawVol,
-	            squareVol: squareVol,
-	            triVol: triVol });
-	        }.bind(this))
+	        { className: 'synth' },
+	        React.createElement(
+	          'div',
+	          { className: 'keys group' },
+	          KeyCodes.map(function (keyCode, index) {
+	            noteName = FullKeyMapping[keyCode][this.state.currentOctave].slice(0, -1);
+	            return React.createElement(SynthKey, {
+	              noteName: noteName,
+	              key: index,
+	              keyCode: keyCode,
+	              currentOctave: this.state.currentOctave,
+	              masterVolume: vol,
+	              filterCutoff: cutoff,
+	              Q: Q,
+	              sawVol: sawVol,
+	              squareVol: squareVol,
+	              triVol: triVol,
+	              filterLFOAmount: filterLFOAmount });
+	          }.bind(this))
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'div',
+	          { className: 'sliders' },
+	          React.createElement(
+	            'label',
+	            null,
+	            'Master Volume:',
+	            React.createElement('input', {
+	              id: 'master-volume',
+	              type: 'range',
+	              min: '0',
+	              max: '1',
+	              step: '0.01',
+	              defaultValue: '0.2',
+	              onChange: this.handleMasterVolChange })
+	          ),
+	          React.createElement(
+	            'label',
+	            null,
+	            'Filter Cutoff:',
+	            React.createElement('input', {
+	              id: 'filter-cutoff',
+	              type: 'range',
+	              min: '50',
+	              max: '15000',
+	              step: '50',
+	              defaultValue: '2000',
+	              onChange: this.handleFilterCutoff })
+	          ),
+	          React.createElement(
+	            'label',
+	            null,
+	            'Filter Resonance:',
+	            React.createElement('input', {
+	              id: 'filter-resonance',
+	              type: 'range',
+	              min: '0.1',
+	              max: '40',
+	              step: '.1',
+	              defaultValue: '0',
+	              onChange: this.handleFilterResonance })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            'Saw Volume:',
+	            React.createElement('input', {
+	              id: 'saw-vol',
+	              type: 'range',
+	              min: '0',
+	              max: '1',
+	              step: '.001',
+	              defaultValue: '0.2',
+	              onChange: this.handleSawVolChange })
+	          ),
+	          React.createElement(
+	            'label',
+	            null,
+	            'Square Volume:',
+	            React.createElement('input', {
+	              id: 'square-vol',
+	              type: 'range',
+	              min: '0',
+	              max: '1',
+	              step: '.001',
+	              defaultValue: '0.2',
+	              onChange: this.handleSquareVolChange })
+	          ),
+	          React.createElement(
+	            'label',
+	            null,
+	            'Triangle Volume:',
+	            React.createElement('input', {
+	              id: 'tri-vol',
+	              type: 'range',
+	              min: '0',
+	              max: '1',
+	              step: '.001',
+	              defaultValue: '0.2',
+	              onChange: this.handleTriVolChange })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            'Filter LFO Amount:',
+	            React.createElement('input', {
+	              id: 'filter-lfo-amount',
+	              type: 'range',
+	              min: '0',
+	              max: '1',
+	              step: '.01',
+	              defaultValue: '0',
+	              onChange: this.handleFilterLFOAmountChange })
+	          )
+	        )
 	      ),
-	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
-	        { className: 'sliders' },
+	        { className: 'instructions' },
 	        React.createElement(
-	          'label',
+	          'div',
+	          { className: 'img-holder' },
+	          React.createElement('img', { src: 'app/assets/images/natkeyboard_text2.png', className: 'instructions-img' })
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'personal-details' },
+	        React.createElement(
+	          'span',
 	          null,
-	          'Master Volume:',
-	          React.createElement('input', {
-	            id: 'master-volume',
-	            type: 'range',
-	            min: '0',
-	            max: '1',
-	            step: '0.01',
-	            defaultValue: '0.2',
-	            onChange: this.handleMasterVolChange })
+	          React.createElement(
+	            'a',
+	            { href: 'natotthomer.com' },
+	            'Personal Site'
+	          )
 	        ),
-	        React.createElement('br', null),
+	        '   ',
 	        React.createElement(
-	          'label',
+	          'span',
 	          null,
-	          'Filter Cutoff:',
-	          React.createElement('input', {
-	            id: 'filter-cutoff',
-	            type: 'range',
-	            min: '0',
-	            max: '15000',
-	            step: '250',
-	            defaultValue: '2000',
-	            onChange: this.handleFilterCutoff })
+	          React.createElement(
+	            'a',
+	            { href: 'https://github.com/natotthomer' },
+	            'GitHub'
+	          )
 	        ),
-	        React.createElement('br', null),
+	        '   ',
 	        React.createElement(
-	          'label',
+	          'span',
 	          null,
-	          'Filter Resonance:',
-	          React.createElement('input', {
-	            id: 'filter-resonance',
-	            type: 'range',
-	            min: '0.1',
-	            max: '40',
-	            step: '.1',
-	            defaultValue: '0',
-	            onChange: this.handleFilterResonance })
+	          React.createElement(
+	            'a',
+	            { href: 'https://www.linkedin.com/in/nathanielotthomer' },
+	            'LinkedIn'
+	          )
 	        ),
-	        React.createElement('br', null),
+	        '   ',
 	        React.createElement(
-	          'label',
+	          'span',
 	          null,
-	          'Saw Volume:',
-	          React.createElement('input', {
-	            id: 'saw-vol',
-	            type: 'range',
-	            min: '0',
-	            max: '1',
-	            step: '.001',
-	            defaultValue: '0.2',
-	            onChange: this.handleSawVolChange })
+	          React.createElement(
+	            'a',
+	            { href: 'app/assets/images/NOH_Resume.pdf' },
+	            'Resume'
+	          )
 	        ),
-	        React.createElement('br', null),
+	        '   ',
 	        React.createElement(
-	          'label',
+	          'span',
 	          null,
-	          'Square Volume:',
-	          React.createElement('input', {
-	            id: 'square-vol',
-	            type: 'range',
-	            min: '0',
-	            max: '1',
-	            step: '.001',
-	            defaultValue: '0.2',
-	            onChange: this.handleSquareVolChange })
-	        ),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'label',
-	          null,
-	          'Triangle Volume:',
-	          React.createElement('input', {
-	            id: 'tri-vol',
-	            type: 'range',
-	            min: '0',
-	            max: '1',
-	            step: '.001',
-	            defaultValue: '0.2',
-	            onChange: this.handleTriVolChange })
+	          React.createElement(
+	            'a',
+	            { href: 'mailto://nathaniel.ott.homer@gmail.com' },
+	            'Email'
+	          )
 	        )
 	      )
 	    );
 	  },
 	
 	  _onChange: function () {
-	    console.log(this.masterVolumeSlider.value);
-	    this.setState({ notes: KeyStore.all(), masterVolume: this.masterVolumeSlider.value });
+	    this.setState({ notes: KeyStore.all() });
 	  }
 	});
 	
@@ -20571,12 +20650,14 @@
 	    var newSawVol = newProps.sawVol;
 	    var newSquareVol = newProps.squareVol;
 	    var newTriVol = newProps.triVol;
+	    var newFilterLFOAmount = newProps.filterLFOAmount;
 	    this.note.changeMasterVol(newVol);
 	    this.note.changeFilterFreq(newCutoff);
 	    this.note.changeResonance(newQ);
 	    this.note.changeSawVol(newSawVol);
 	    this.note.changeSquareVol(newSquareVol);
 	    this.note.changeTriVol(newTriVol);
+	    this.note.changeFilterLFOAmount(newFilterLFOAmount);
 	  },
 	
 	  makeFullNoteName: function () {
@@ -20616,13 +20697,13 @@
 	    var pressed = this.thisKeyPressed();
 	
 	    if (this.note) {
-	      // this.note.start(0,0,0,0);
+	
 	      this.note.stop();
 	    }
 	    if (pressed) {
 	      console.log("PRESSED");
 	      this.note = new Note(this.makeNewFreq(), this.props.masterVolume, this.props.filterCutoff, this.props.Q);
-	      this.note.start(this.props.masterVolume, this.props.sawVol, this.props.squareVol, this.props.triVol);
+	      this.note.start(this.props.masterVolume, this.props.sawVol, this.props.squareVol, this.props.triVol, this.props.filterLFOAmount);
 	    } else if (this.note) {
 	      console.log("stopping");
 	      this.note.stop();
@@ -27473,10 +27554,16 @@
 
 	var ctx = new (window.AudioContext || window.webkitAudioContext)();
 	
+	// Main oscillators — Sawtooth, Square and Triangle
+	// Sawtooth detuned 101% of input frequency
+	// Square detuned 99% of input frequency
+	// Triangle not detuned at all
+	// Individual gain nodes for each oscillator
+	
 	var createSawOscillator = function (freq) {
 	  var osc = ctx.createOscillator();
 	  osc.type = "sawtooth";
-	  osc.frequency.value = freq * 1.01;
+	  osc.frequency.value = freq * 1.008;
 	  osc.detune.value = 0;
 	  // osc.start();
 	  return osc;
@@ -27491,7 +27578,7 @@
 	var createSquareOscillator = function (freq) {
 	  var osc = ctx.createOscillator();
 	  osc.type = "square";
-	  osc.frequency.value = freq * 0.99;
+	  osc.frequency.value = freq * 0.992;
 	  osc.detune.value = 0;
 	  // osc.start();
 	  return osc;
@@ -27518,6 +27605,8 @@
 	  return gainNode;
 	};
 	
+	// Builds resonant Lowpass Filter
+	
 	var createLowpassFilter = function (cutoff, Q) {
 	  var lowpassFilter = ctx.createBiquadFilter();
 	  lowpassFilter.type = 'lowpass';
@@ -27527,6 +27616,8 @@
 	  return lowpassFilter;
 	};
 	
+	// Builds Master Gain Node
+	
 	var createMasterGainNode = function () {
 	  var gainNode = ctx.createGain();
 	  gainNode.gain.value = 0.2;
@@ -27534,11 +27625,35 @@
 	  return gainNode;
 	};
 	
-	var Note = function (freq, vol, cutoff, Q) {
+	// Builds LFO and corresponding gain node
+	
+	var createLFO = function () {
+	  var osc = ctx.createOscillator();
+	  osc.type = 'sine';
+	  osc.frequency.value = 4;
+	  osc.start();
+	  return osc;
+	};
+	
+	var createLFOGain = function () {
+	  var gainNode = ctx.createGain();
+	  gainNode.gain.value = 1;
+	  return gainNode;
+	};
+	
+	// Builds a note and a set of oscillators, filter and gain for each
+	
+	var Note = function (freq, vol, cutoff, Q, filterLFOAmount) {
 	  this.masterGain = createMasterGainNode();
 	  this.masterGain.gain.value = vol;
 	  this.lowpassFilter = createLowpassFilter(cutoff, Q);
 	  this.lowpassFilter.connect(this.masterGain);
+	
+	  this.lfo = createLFO();
+	  // this.lfoGain = createLFOGain();
+	  this.lfo.connect(this.lowpassFilter.detune);
+	  // this.lfoGain.connect(this.lowpassFilter.detune);
+	  // debugger;
 	
 	  this.sawNode = createSawOscillator(freq);
 	  this.sawGain = createSawGainNode();
@@ -27561,11 +27676,13 @@
 	};
 	
 	Note.prototype = {
-	  start: function (startVol, sawVol, squareVol, triVol) {
+	  start: function (startVol, sawVol, squareVol, triVol, filterLFOAmount) {
 	    this.sawGain.gain.value = sawVol;
 	    this.squareGain.gain.value = squareVol;
 	    this.triGain.gain.value = triVol;
 	    this.masterGain.gain.value = startVol;
+	    // debugger;
+	    // this.lfoGain.gain.value = filterLFOAmount;
 	  },
 	
 	  stop: function () {
@@ -27596,6 +27713,13 @@
 	
 	  changeTriVol: function (newTriVol) {
 	    this.triGain.gain.value = newTriVol;
+	  },
+	
+	  changeFilterLFOAmount: function (newLFOGain) {
+	    // console.log(newLFOGain);
+	    // this.lfoGain.gain.value = newLFOGain;
+	    // console.log(this.lfoGain.gain.value);
+	    // debugger;
 	  }
 	};
 	
@@ -27648,24 +27772,24 @@
 	// ];
 	
 	var FullKeyMapping = {
-	  65: ['C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6'],
-	  87: ['Db0', 'Db1', 'Db2', 'Db3', 'Db4', 'Db5', 'Db6'],
-	  83: ['D0', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6'],
-	  69: ['Eb0', 'Eb1', 'Eb2', 'Eb3', 'Eb4', 'Eb5', 'Eb6'],
-	  68: ['E0', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6'],
-	  70: ['F0', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6'],
-	  84: ['Gb0', 'Gb1', 'Gb2', 'Gb3', 'Gb4', 'Gb5', 'Gb6'],
-	  71: ['G0', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6'],
-	  89: ['Ab0', 'Ab1', 'Ab2', 'Ab3', 'Ab4', 'Ab5', 'Ab6'],
-	  72: ['A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6'],
-	  85: ['Bb0', 'Bb1', 'Bb2', 'Bb3', 'Bb4', 'Bb5', 'Bb6'],
-	  74: ['B0', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6'],
-	  75: ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'],
-	  79: ['Db1', 'Db2', 'Db3', 'Db4', 'Db5', 'Db6', 'Db7'],
-	  76: ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7'],
-	  80: ['Eb1', 'Eb2', 'Eb3', 'Eb4', 'Eb5', 'Eb6', 'Eb7'],
-	  186: ['E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7'],
-	  222: ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7']
+	  65: ['C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'],
+	  87: ['Db0', 'Db1', 'Db2', 'Db3', 'Db4', 'Db5', 'Db6', 'Db7'],
+	  83: ['D0', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7'],
+	  69: ['Eb0', 'Eb1', 'Eb2', 'Eb3', 'Eb4', 'Eb5', 'Eb6', 'Eb7'],
+	  68: ['E0', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7'],
+	  70: ['F0', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7'],
+	  84: ['Gb0', 'Gb1', 'Gb2', 'Gb3', 'Gb4', 'Gb5', 'Gb6', 'Gb7'],
+	  71: ['G0', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7'],
+	  89: ['Ab0', 'Ab1', 'Ab2', 'Ab3', 'Ab4', 'Ab5', 'Ab6', 'Ab7'],
+	  72: ['A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7'],
+	  85: ['Bb0', 'Bb1', 'Bb2', 'Bb3', 'Bb4', 'Bb5', 'Bb6', 'Bb7'],
+	  74: ['B0', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7'],
+	  75: ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8'],
+	  79: ['Db1', 'Db2', 'Db3', 'Db4', 'Db5', 'Db6', 'Db7', 'Db8'],
+	  76: ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8'],
+	  80: ['Eb1', 'Eb2', 'Eb3', 'Eb4', 'Eb5', 'Eb6', 'Eb7', 'Eb8'],
+	  186: ['E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8'],
+	  222: ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']
 	};
 	
 	module.exports = FullKeyMapping;
