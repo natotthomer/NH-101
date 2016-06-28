@@ -47,6 +47,34 @@ var Synth = React.createClass({
     this.setState({ filterLFOAmount: e.target.value });
   },
 
+  handleFilterLFOSpeedChange: function (e) {
+    this.setState({ filterLFOSpeed: e.target.value });
+  },
+
+  handleFilterLFOWaveChange: function (e) {
+    this.setState({ filterLFOWave: e.target.value });
+  },
+
+  handleAmpLFOAmountChange: function (e) {
+    this.setState({ ampLFOAmount: e.target.value });
+  },
+
+  handleAmpLFOSpeedChange: function (e) {
+    this.setState({ ampLFOSpeed: e.target.value });
+  },
+
+  handleAmpLFOWaveChange: function (e) {
+    this.setState({ ampLFOWave: e.target.value });
+  },
+
+  handleSubOscVolChange: function (e) {
+    this.setState({ subOscVol: e.target.value });
+  },
+
+  handleHPFChange: function (e) {
+    this.setState({ hpf: e.target.value });
+  },
+
   getInitialState: function () {
     return {
       notes: KeyStore.all(),
@@ -57,7 +85,14 @@ var Synth = React.createClass({
       sawVol: 0.2,
       squareVol: 0.2,
       triVol: 0.2,
-      filterLFOAmount: 0
+      filterLFOAmount: 0,
+      filterLFOSpeed: 1,
+      filterLFOWave: 0,
+      subOscVol: 0,
+      ampLFOAmount: 0,
+      ampLFOSpeed: 1,
+      ampLFOWave: 0,
+      hpf: 200
     };
   },
 
@@ -70,6 +105,13 @@ var Synth = React.createClass({
     var squareVol = this.state.squareVol;
     var triVol = this.state.triVol;
     var filterLFOAmount = this.state.filterLFOAmount;
+    var filterLFOSpeed = this.state.filterLFOSpeed;
+    var filterLFOWave = this.state.filterLFOWave;
+    var subOscVol = this.state.subOscVol;
+    var ampLFOAmount = this.state.ampLFOAmount;
+    var ampLFOSpeed = this.state.ampLFOSpeed;
+    var ampLFOWave = this.state.ampLFOWave;
+    var hpf = this.state.hpf;
     return (
       <div className="main">
         <div className="synth">
@@ -89,7 +131,14 @@ var Synth = React.createClass({
                   sawVol={sawVol}
                   squareVol={squareVol}
                   triVol={triVol}
-                  filterLFOAmount={filterLFOAmount}/>
+                  filterLFOAmount={filterLFOAmount}
+                  filterLFOSpeed={filterLFOSpeed}
+                  filterLFOWave={filterLFOWave}
+                  subOscVol={subOscVol}
+                  ampLFOAmount={ampLFOAmount}
+                  ampLFOSpeed={ampLFOSpeed}
+                  ampLFOWave={ampLFOWave}
+                  hpf={hpf}/>
               );
             }.bind(this))
           }
@@ -111,7 +160,7 @@ var Synth = React.createClass({
                   className="param-slider"/>
               </div>&nbsp;&nbsp;&nbsp;
               <div className="slider-container">
-                <p>
+                <p className="slider-label">
                   Cutoff:<br/>
                 </p>
                 <input
@@ -125,7 +174,7 @@ var Synth = React.createClass({
                   className="param-slider"/>
               </div>
               <div className="slider-container">
-                <p>
+                <p className="slider-label">
                   Res:<br/>
                 </p>
                 <input
@@ -138,9 +187,9 @@ var Synth = React.createClass({
                   onChange={this.handleFilterResonance}
                   className="param-slider"/>
               </div>
-     
+
               <div className="slider-container">
-                <p>
+                <p className="slider-label">
                   Saw:<br/>
                 </p>
                 <input
@@ -154,7 +203,7 @@ var Synth = React.createClass({
                   className="param-slider"/>
               </div>
               <div className="slider-container">
-                <p>
+                <p className="slider-label">
                   Square:<br/>
                 </p>
                 <input
@@ -168,7 +217,7 @@ var Synth = React.createClass({
                   className="param-slider"/>
               </div>
               <div className="slider-container">
-                <p>
+                <p className="slider-label">
                   Tri:<br/>
                 </p>
                 <input
@@ -182,17 +231,115 @@ var Synth = React.createClass({
                   className="param-slider"/>
               </div>
               <div className="slider-container">
-                <p>
-                  LPF LFO:<br/>
+                <p className="slider-label">
+                  LFO 1 Int:<br/>
                 </p>
                 <input
                   id='filter-lfo-amount'
                   type="range"
                   min="0"
-                  max="1"
+                  max="10000"
                   step=".01"
                   defaultValue="0"
                   onChange={this.handleFilterLFOAmountChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p className="slider-label">
+                  LFO 1 Rate:<br/>
+                </p>
+                <input
+                  id='filter-lfo-speed'
+                  type="range"
+                  min="0.1"
+                  max="50"
+                  step="0.1"
+                  defaultValue="0"
+                  onChange={this.handleFilterLFOSpeedChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p className="slider-label">
+                  LFO 1 Wave:<br/>
+                </p>
+                <input
+                  id='filter-lfo-wave'
+                  type="range"
+                  min="0"
+                  max="3"
+                  step="1"
+                  defaultValue="0"
+                  onChange={this.handleFilterLFOWaveChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p className="slider-label">
+                  LFO 2 Int:<br/>
+                </p>
+                <input
+                  id='amp-lfo-amount'
+                  type="range"
+                  min="0"
+                  max="2"
+                  step=".01"
+                  defaultValue="0"
+                  onChange={this.handleAmpLFOAmountChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p className="slider-label">
+                  LFO 2 Rate:<br/>
+                </p>
+                <input
+                  id='amp-lfo-speed'
+                  type="range"
+                  min="0.1"
+                  max="50"
+                  step="0.1"
+                  defaultValue="0"
+                  onChange={this.handleAmpLFOSpeedChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p className="slider-label">
+                  LFO 2 Wave:<br/>
+                </p>
+                <input
+                  id='amp-lfo-wave'
+                  type="range"
+                  min="0"
+                  max="3"
+                  step="1"
+                  defaultValue="0"
+                  onChange={this.handleAmpLFOWaveChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p className="slider-label">
+                  Sub:<br/>
+                </p>
+                <input
+                  id='sub-osc-vol'
+                  type="range"
+                  min="0"
+                  max="0.8"
+                  step="0.001"
+                  defaultValue="0"
+                  onChange={this.handleSubOscVolChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p className="slider-label">
+                  HPF:<br/>
+                </p>
+                <input
+                  id='hpf'
+                  type="range"
+                  min="200"
+                  max="20000"
+                  step="1"
+                  defaultValue="200"
+                  onChange={this.handleHPFChange}
                   className="param-slider"/>
               </div>
             </div>
