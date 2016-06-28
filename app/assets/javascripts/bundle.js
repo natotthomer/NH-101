@@ -20455,97 +20455,142 @@
 	          'div',
 	          { className: 'sliders' },
 	          React.createElement(
-	            'label',
-	            null,
-	            'Master Volume:',
-	            React.createElement('input', {
-	              id: 'master-volume',
-	              type: 'range',
-	              min: '0',
-	              max: '1',
-	              step: '0.01',
-	              defaultValue: '0.2',
-	              onChange: this.handleMasterVolChange })
-	          ),
-	          React.createElement(
-	            'label',
-	            null,
-	            'Filter Cutoff:',
-	            React.createElement('input', {
-	              id: 'filter-cutoff',
-	              type: 'range',
-	              min: '50',
-	              max: '15000',
-	              step: '50',
-	              defaultValue: '2000',
-	              onChange: this.handleFilterCutoff })
-	          ),
-	          React.createElement(
-	            'label',
-	            null,
-	            'Filter Resonance:',
-	            React.createElement('input', {
-	              id: 'filter-resonance',
-	              type: 'range',
-	              min: '0.1',
-	              max: '40',
-	              step: '.1',
-	              defaultValue: '0',
-	              onChange: this.handleFilterResonance })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            'Saw Volume:',
-	            React.createElement('input', {
-	              id: 'saw-vol',
-	              type: 'range',
-	              min: '0',
-	              max: '1',
-	              step: '.001',
-	              defaultValue: '0.2',
-	              onChange: this.handleSawVolChange })
-	          ),
-	          React.createElement(
-	            'label',
-	            null,
-	            'Square Volume:',
-	            React.createElement('input', {
-	              id: 'square-vol',
-	              type: 'range',
-	              min: '0',
-	              max: '1',
-	              step: '.001',
-	              defaultValue: '0.2',
-	              onChange: this.handleSquareVolChange })
-	          ),
-	          React.createElement(
-	            'label',
-	            null,
-	            'Triangle Volume:',
-	            React.createElement('input', {
-	              id: 'tri-vol',
-	              type: 'range',
-	              min: '0',
-	              max: '1',
-	              step: '.001',
-	              defaultValue: '0.2',
-	              onChange: this.handleTriVolChange })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            'Filter LFO Amount:',
-	            React.createElement('input', {
-	              id: 'filter-lfo-amount',
-	              type: 'range',
-	              min: '0',
-	              max: '1',
-	              step: '.01',
-	              defaultValue: '0',
-	              onChange: this.handleFilterLFOAmountChange })
+	            'div',
+	            { className: 'clearfix slider-group' },
+	            React.createElement(
+	              'div',
+	              { className: 'slider-container' },
+	              React.createElement(
+	                'p',
+	                { className: 'slider-label' },
+	                'Vol:',
+	                React.createElement('br', null)
+	              ),
+	              React.createElement('input', {
+	                id: 'master-volume',
+	                type: 'range',
+	                min: '0',
+	                max: '1',
+	                step: '0.01',
+	                defaultValue: '0.2',
+	                onChange: this.handleMasterVolChange,
+	                className: 'param-slider' })
+	            ),
+	            '   ',
+	            React.createElement(
+	              'div',
+	              { className: 'slider-container' },
+	              React.createElement(
+	                'p',
+	                null,
+	                'Cutoff:',
+	                React.createElement('br', null)
+	              ),
+	              React.createElement('input', {
+	                id: 'filter-cutoff',
+	                type: 'range',
+	                min: '50',
+	                max: '15000',
+	                step: '50',
+	                defaultValue: '2000',
+	                onChange: this.handleFilterCutoff,
+	                className: 'param-slider' })
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'slider-container' },
+	              React.createElement(
+	                'p',
+	                null,
+	                'Res:',
+	                React.createElement('br', null)
+	              ),
+	              React.createElement('input', {
+	                id: 'filter-resonance',
+	                type: 'range',
+	                min: '0.1',
+	                max: '40',
+	                step: '.1',
+	                defaultValue: '0',
+	                onChange: this.handleFilterResonance,
+	                className: 'param-slider' })
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'slider-container' },
+	              React.createElement(
+	                'p',
+	                null,
+	                'Saw:',
+	                React.createElement('br', null)
+	              ),
+	              React.createElement('input', {
+	                id: 'saw-vol',
+	                type: 'range',
+	                min: '0',
+	                max: '1',
+	                step: '.001',
+	                defaultValue: '0.2',
+	                onChange: this.handleSawVolChange,
+	                className: 'param-slider' })
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'slider-container' },
+	              React.createElement(
+	                'p',
+	                null,
+	                'Square:',
+	                React.createElement('br', null)
+	              ),
+	              React.createElement('input', {
+	                id: 'square-vol',
+	                type: 'range',
+	                min: '0',
+	                max: '1',
+	                step: '.001',
+	                defaultValue: '0.2',
+	                onChange: this.handleSquareVolChange,
+	                className: 'param-slider' })
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'slider-container' },
+	              React.createElement(
+	                'p',
+	                null,
+	                'Tri:',
+	                React.createElement('br', null)
+	              ),
+	              React.createElement('input', {
+	                id: 'tri-vol',
+	                type: 'range',
+	                min: '0',
+	                max: '1',
+	                step: '.001',
+	                defaultValue: '0.2',
+	                onChange: this.handleTriVolChange,
+	                className: 'param-slider' })
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'slider-container' },
+	              React.createElement(
+	                'p',
+	                null,
+	                'LPF LFO:',
+	                React.createElement('br', null)
+	              ),
+	              React.createElement('input', {
+	                id: 'filter-lfo-amount',
+	                type: 'range',
+	                min: '0',
+	                max: '1',
+	                step: '.01',
+	                defaultValue: '0',
+	                onChange: this.handleFilterLFOAmountChange,
+	                className: 'param-slider' })
+	            )
 	          )
 	        )
 	      ),
@@ -20563,7 +20608,7 @@
 	        { className: 'personal-details' },
 	        React.createElement(
 	          'span',
-	          null,
+	          { className: 'personal-detail' },
 	          React.createElement(
 	            'a',
 	            { href: 'natotthomer.com' },
@@ -20573,7 +20618,7 @@
 	        '   ',
 	        React.createElement(
 	          'span',
-	          null,
+	          { className: 'personal-detail' },
 	          React.createElement(
 	            'a',
 	            { href: 'https://github.com/natotthomer' },
@@ -20583,7 +20628,7 @@
 	        '   ',
 	        React.createElement(
 	          'span',
-	          null,
+	          { className: 'personal-detail' },
 	          React.createElement(
 	            'a',
 	            { href: 'https://www.linkedin.com/in/nathanielotthomer' },
@@ -20593,7 +20638,7 @@
 	        '   ',
 	        React.createElement(
 	          'span',
-	          null,
+	          { className: 'personal-detail' },
 	          React.createElement(
 	            'a',
 	            { href: 'app/assets/images/NOH_Resume.pdf' },
@@ -20603,7 +20648,7 @@
 	        '   ',
 	        React.createElement(
 	          'span',
-	          null,
+	          { className: 'personal-detail' },
 	          React.createElement(
 	            'a',
 	            { href: 'mailto://nathaniel.ott.homer@gmail.com' },
@@ -27592,7 +27637,7 @@
 	
 	var createTriOscillator = function (freq) {
 	  var osc = ctx.createOscillator();
-	  osc.type = "square";
+	  osc.type = "triangle";
 	  osc.frequency.value = freq * 1.0;
 	  osc.detune.value = 0;
 	  // osc.start();
@@ -27629,15 +27674,15 @@
 	
 	var createLFO = function () {
 	  var osc = ctx.createOscillator();
+	  osc.frequency.value = 1.0;
 	  osc.type = 'sine';
-	  osc.frequency.value = 4;
 	  osc.start();
 	  return osc;
 	};
 	
 	var createLFOGain = function () {
 	  var gainNode = ctx.createGain();
-	  gainNode.gain.value = 1;
+	  gainNode.gain.value = 6000;
 	  return gainNode;
 	};
 	
@@ -27647,13 +27692,25 @@
 	  this.masterGain = createMasterGainNode();
 	  this.masterGain.gain.value = vol;
 	  this.lowpassFilter = createLowpassFilter(cutoff, Q);
-	  this.lowpassFilter.connect(this.masterGain);
 	
 	  this.lfo = createLFO();
-	  // this.lfoGain = createLFOGain();
-	  this.lfo.connect(this.lowpassFilter.detune);
-	  // this.lfoGain.connect(this.lowpassFilter.detune);
+	  this.lfoGain = createLFOGain();
+	
+	  this.lfo.connect(this.lfoGain);
+	  this.lfoGain.connect(this.lowpassFilter.detune);
+	
+	  // var lfo = ctx.createOscillator();
+	  // lfo.frequency.value = 1.0;
+	  // lfo.start();
+	  //
+	  // var lfoGain = ctx.createGain();
+	  // lfoGain.gain.value = 6000;
+	  //
+	  // lfo.connect(lfoGain);
+	  // // debugger;
+	  // lfoGain.connect(this.lowpassFilter.detune);
 	  // debugger;
+	  this.lowpassFilter.connect(this.masterGain);
 	
 	  this.sawNode = createSawOscillator(freq);
 	  this.sawGain = createSawGainNode();
@@ -27682,7 +27739,7 @@
 	    this.triGain.gain.value = triVol;
 	    this.masterGain.gain.value = startVol;
 	    // debugger;
-	    // this.lfoGain.gain.value = filterLFOAmount;
+	    this.lfoGain.gain.value = filterLFOAmount;
 	  },
 	
 	  stop: function () {
@@ -27696,6 +27753,7 @@
 	  },
 	
 	  changeFilterFreq: function (newFreq) {
+	    // console.log("blah");
 	    this.lowpassFilter.frequency.value = newFreq;
 	  },
 	
@@ -27716,7 +27774,9 @@
 	  },
 	
 	  changeFilterLFOAmount: function (newLFOGain) {
-	    // console.log(newLFOGain);
+	    console.log(this.lowpassFilter.detune);
+	    console.log(newLFOGain);
+	
 	    // this.lfoGain.gain.value = newLFOGain;
 	    // console.log(this.lfoGain.gain.value);
 	    // debugger;

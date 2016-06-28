@@ -38,7 +38,7 @@ var createSquareGainNode = function () {
 
 var createTriOscillator = function (freq) {
   var osc = ctx.createOscillator();
-  osc.type = "square";
+  osc.type = "triangle";
   osc.frequency.value = freq * 1.0;
   osc.detune.value = 0;
   // osc.start();
@@ -75,15 +75,15 @@ var createMasterGainNode = function () {
 
 var createLFO = function () {
   var osc = ctx.createOscillator();
+  osc.frequency.value = 1.0;
   osc.type = 'sine';
-  osc.frequency.value = 4;
   osc.start();
   return osc;
 };
 
 var createLFOGain = function () {
   var gainNode = ctx.createGain();
-  gainNode.gain.value = 1;
+  gainNode.gain.value = 6000;
   return gainNode;
 };
 
@@ -93,13 +93,25 @@ var Note = function (freq, vol, cutoff, Q, filterLFOAmount) {
   this.masterGain = createMasterGainNode();
   this.masterGain.gain.value = vol;
   this.lowpassFilter = createLowpassFilter(cutoff, Q);
-  this.lowpassFilter.connect(this.masterGain);
 
   this.lfo = createLFO();
-  // this.lfoGain = createLFOGain();
-  this.lfo.connect(this.lowpassFilter.detune);
-  // this.lfoGain.connect(this.lowpassFilter.detune);
+  this.lfoGain = createLFOGain();
+
+  this.lfo.connect(this.lfoGain);
+  this.lfoGain.connect(this.lowpassFilter.detune);
+
+  // var lfo = ctx.createOscillator();
+  // lfo.frequency.value = 1.0;
+  // lfo.start();
+  //
+  // var lfoGain = ctx.createGain();
+  // lfoGain.gain.value = 6000;
+  //
+  // lfo.connect(lfoGain);
+  // // debugger;
+  // lfoGain.connect(this.lowpassFilter.detune);
   // debugger;
+  this.lowpassFilter.connect(this.masterGain);
 
   this.sawNode = createSawOscillator(freq);
   this.sawGain = createSawGainNode();
@@ -128,7 +140,7 @@ Note.prototype = {
     this.triGain.gain.value = triVol;
     this.masterGain.gain.value = startVol;
     // debugger;
-    // this.lfoGain.gain.value = filterLFOAmount;
+    this.lfoGain.gain.value = filterLFOAmount;
   },
 
   stop: function () {
@@ -142,6 +154,7 @@ Note.prototype = {
   },
 
   changeFilterFreq: function (newFreq) {
+    // console.log("blah");
     this.lowpassFilter.frequency.value = newFreq;
   },
 
@@ -162,7 +175,9 @@ Note.prototype = {
   },
 
   changeFilterLFOAmount: function (newLFOGain) {
-    // console.log(newLFOGain);
+    console.log(this.lowpassFilter.detune);
+    console.log(newLFOGain);
+
     // this.lfoGain.gain.value = newLFOGain;
     // console.log(this.lfoGain.gain.value);
     // debugger;

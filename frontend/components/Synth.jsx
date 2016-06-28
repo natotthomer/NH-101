@@ -95,76 +95,107 @@ var Synth = React.createClass({
           }
           </div><br/>
           <div className="sliders">
-            <label>Master Volume:
-              <input
-                id='master-volume'
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                defaultValue="0.2"
-                onChange={this.handleMasterVolChange}/>
-            </label>
-            <label>Filter Cutoff:
-              <input
-                id='filter-cutoff'
-                type="range"
-                min="50"
-                max="15000"
-                step="50"
-                defaultValue="2000"
-                onChange={this.handleFilterCutoff}/>
-            </label>
-            <label>Filter Resonance:
-              <input
-                id='filter-resonance'
-                type="range"
-                min="0.1"
-                max="40"
-                step=".1"
-                defaultValue="0"
-                onChange={this.handleFilterResonance}/>
-            </label><br/>
-            <label>Saw Volume:
-              <input
-                id='saw-vol'
-                type="range"
-                min="0"
-                max="1"
-                step=".001"
-                defaultValue="0.2"
-                onChange={this.handleSawVolChange}/>
-            </label>
-            <label>Square Volume:
-              <input
-                id='square-vol'
-                type="range"
-                min="0"
-                max="1"
-                step=".001"
-                defaultValue="0.2"
-                onChange={this.handleSquareVolChange}/>
-            </label>
-            <label>Triangle Volume:
-              <input
-                id='tri-vol'
-                type="range"
-                min="0"
-                max="1"
-                step=".001"
-                defaultValue="0.2"
-                onChange={this.handleTriVolChange}/>
-            </label><br/>
-            <label>Filter LFO Amount:
-              <input
-                id='filter-lfo-amount'
-                type="range"
-                min="0"
-                max="1"
-                step=".01"
-                defaultValue="0"
-                onChange={this.handleFilterLFOAmountChange}/>
-            </label>
+            <div className="clearfix slider-group">
+              <div className="slider-container">
+                <p className="slider-label">
+                  Vol:<br/>
+                </p>
+                <input
+                  id='master-volume'
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  defaultValue="0.2"
+                  onChange={this.handleMasterVolChange}
+                  className="param-slider"/>
+              </div>&nbsp;&nbsp;&nbsp;
+              <div className="slider-container">
+                <p>
+                  Cutoff:<br/>
+                </p>
+                <input
+                  id='filter-cutoff'
+                  type="range"
+                  min="50"
+                  max="15000"
+                  step="50"
+                  defaultValue="2000"
+                  onChange={this.handleFilterCutoff}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p>
+                  Res:<br/>
+                </p>
+                <input
+                  id='filter-resonance'
+                  type="range"
+                  min="0.1"
+                  max="40"
+                  step=".1"
+                  defaultValue="0"
+                  onChange={this.handleFilterResonance}
+                  className="param-slider"/>
+              </div>
+     
+              <div className="slider-container">
+                <p>
+                  Saw:<br/>
+                </p>
+                <input
+                  id='saw-vol'
+                  type="range"
+                  min="0"
+                  max="1"
+                  step=".001"
+                  defaultValue="0.2"
+                  onChange={this.handleSawVolChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p>
+                  Square:<br/>
+                </p>
+                <input
+                  id='square-vol'
+                  type="range"
+                  min="0"
+                  max="1"
+                  step=".001"
+                  defaultValue="0.2"
+                  onChange={this.handleSquareVolChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p>
+                  Tri:<br/>
+                </p>
+                <input
+                  id='tri-vol'
+                  type="range"
+                  min="0"
+                  max="1"
+                  step=".001"
+                  defaultValue="0.2"
+                  onChange={this.handleTriVolChange}
+                  className="param-slider"/>
+              </div>
+              <div className="slider-container">
+                <p>
+                  LPF LFO:<br/>
+                </p>
+                <input
+                  id='filter-lfo-amount'
+                  type="range"
+                  min="0"
+                  max="1"
+                  step=".01"
+                  defaultValue="0"
+                  onChange={this.handleFilterLFOAmountChange}
+                  className="param-slider"/>
+              </div>
+            </div>
           </div>
         </div>
         <div className="instructions">
@@ -174,19 +205,19 @@ var Synth = React.createClass({
         </div>
 
         <div className="personal-details">
-        <span>
-          <a href="natotthomer.com">Personal Site</a>
-        </span>&nbsp;&nbsp;&nbsp;
-          <span>
+          <span className="personal-detail">
+            <a href="natotthomer.com">Personal Site</a>
+          </span>&nbsp;&nbsp;&nbsp;
+          <span className="personal-detail">
             <a href="https://github.com/natotthomer">GitHub</a>
           </span>&nbsp;&nbsp;&nbsp;
-          <span>
+          <span className="personal-detail">
             <a href="https://www.linkedin.com/in/nathanielotthomer">LinkedIn</a>
           </span>&nbsp;&nbsp;&nbsp;
-          <span>
+          <span className="personal-detail">
             <a href="app/assets/images/NOH_Resume.pdf">Resume</a>
           </span>&nbsp;&nbsp;&nbsp;
-          <span>
+          <span className="personal-detail">
             <a href="mailto://nathaniel.ott.homer@gmail.com">Email</a>
           </span>
         </div>
