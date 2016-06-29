@@ -140,29 +140,54 @@ body {
 }
 
 .slider-container {
+  /*position: relative;*/
   display: inline;
   float: left;
   padding-left: 5px;
   padding-right: 5px;
   width: 70px;
+  height: 100px;
   text-align: center;
 }
 
+.slider-sub-container {
+  position: relative;
+  width: 70px;
+  height: 100px;
+}
+
 .param-slider {
+  position: absolute;
+  /*margin-top: 40px;
+  margin-right: 50px;*/
+  top: 80px;
+  left: -7.5px;
   transform: rotateZ(-90deg);
   width: 85px;
-  margin-top: 40px;
+}
+
+.slider-first-group {
+  height: 80px;
+  margin-left: 61px;
+}
+
+.slider-second-group {
+  margin-left: 95px;
+  margin-bottom: 30px;
 }
 
 .slider-group {
   margin: auto;
   text-align: center;
-  width: 650px;
+  width: 700px;
   padding-left: 40px;
 }
 
 .slider-label {
+  position: absolute;
   font-size: 12px;
+  text-align: center;
+  width: 70px;
 }
 
 .filler {

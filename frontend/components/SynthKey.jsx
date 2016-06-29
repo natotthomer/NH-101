@@ -79,7 +79,7 @@ var SynthKey = React.createClass({
     var pressed = this.thisKeyPressed();
 
     if (this.note) {
-
+      
       this.note.stop();
     }
     if (pressed) {
@@ -112,7 +112,6 @@ var SynthKey = React.createClass({
         this.props.hpf
       );
     } else if (this.note) {
-      console.log("stopping");
       this.note.stop();
     }
     this.setState({ pressed: pressed });

@@ -65,7 +65,8 @@ var createHighpassFilter = function (cutoff) {
   var highpassFilter = ctx.createBiquadFilter();
   highpassFilter.type = 'highpass';
   highpassFilter.gain.value = 1;
-  highpassFilter.frequency.value = cutoff;
+  highpassFilter.Q.value = 0;
+  highpassFilter.frequency.value = 10000;
   return highpassFilter;
 };
 
@@ -117,8 +118,6 @@ var Note = function (freq, vol, cutoff, Q, filterLFOAmount, filterLFOSpeed, filt
   this.highpassFilter = createHighpassFilter(hpf);
   this.highpassFilter.connect(this.masterGain);
 
-  debugger;
-
   this.lfo1 = createLFO(filterLFOSpeed, filterLFOWave);
   this.lfo1Gain = createLFOGain(filterLFOAmount);
   this.lfo1.connect(this.lfo1Gain);
@@ -167,7 +166,8 @@ Note.prototype = {
       subOscVol,
       ampLFOAmount,
       ampLFOSpeed,
-      ampLFOWave
+      ampLFOWave,
+      hpf
     ) {
     this.sawGain.gain.value = sawVol;
     this.squareGain.gain.value = squareVol;
@@ -180,6 +180,7 @@ Note.prototype = {
     this.lfo2Gain.gain.value = ampLFOAmount;
     this.lfo2.frequency.value = ampLFOSpeed;
     this.lfo2.type = WAVES[ampLFOWave];
+    this.highpassFilter.frequency.value = hpf;
   },
 
   stop: function () {
@@ -243,6 +244,7 @@ Note.prototype = {
 
   changeHPF: function (newHPF) {
     this.highpassFilter.frequency.value = newHPF;
+    console.log(this.highpassFilter.frequency.value);
   }
 };
 
