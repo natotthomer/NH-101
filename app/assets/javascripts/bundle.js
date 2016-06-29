@@ -47,8 +47,8 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(38);
 	var Synth = __webpack_require__(168);
-	var $ = __webpack_require__(197);
-	KeyListener = __webpack_require__(198);
+	var $ = __webpack_require__(198);
+	KeyListener = __webpack_require__(199);
 	
 	document.addEventListener("DOMContentLoaded", function () {
 	  ReactDOM.render(React.createElement(Synth, null), document.getElementById('root'));
@@ -20354,8 +20354,8 @@
 	var React = __webpack_require__(1),
 	    SynthKey = __webpack_require__(169),
 	    KeyStore = __webpack_require__(170),
-	    FullKeyMapping = __webpack_require__(195),
-	    KeyCodes = __webpack_require__(196);
+	    FullKeyMapping = __webpack_require__(196),
+	    KeyCodes = __webpack_require__(197);
 	
 	var Synth = React.createClass({
 	  displayName: 'Synth',
@@ -20628,7 +20628,7 @@
 	var React = __webpack_require__(1),
 	    KeyStore = __webpack_require__(170),
 	    Note = __webpack_require__(193),
-	    MORETONES = __webpack_require__(194);
+	    MORETONES = __webpack_require__(195);
 	
 	var SynthKey = React.createClass({
 	  displayName: 'SynthKey',
@@ -27726,7 +27726,8 @@
 	module.exports = Note;
 
 /***/ },
-/* 194 */
+/* 194 */,
+/* 195 */
 /***/ function(module, exports) {
 
 	var MORETONES = {
@@ -27747,7 +27748,7 @@
 	module.exports = MORETONES;
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports) {
 
 	// var FullKeyMapping = [
@@ -27795,7 +27796,7 @@
 	module.exports = FullKeyMapping;
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports) {
 
 	var KeyCodes = [65, 87, 83, 69, 68, 70, 84, 71, 89, 72, 85, 74, 75, 79, 76, 80, 186, 222];
@@ -27803,7 +27804,7 @@
 	module.exports = KeyCodes;
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -37623,14 +37624,14 @@
 
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(197),
-	    KeyActions = __webpack_require__(199),
-	    TONES = __webpack_require__(200),
-	    KeyMapping = __webpack_require__(201),
-	    RevKeyMapping = __webpack_require__(202),
+	var $ = __webpack_require__(198),
+	    KeyActions = __webpack_require__(200),
+	    TONES = __webpack_require__(201),
+	    KeyMapping = __webpack_require__(202),
+	    RevKeyMapping = __webpack_require__(203),
 	    KeyStore = __webpack_require__(170);
 	
 	$(function () {
@@ -37652,7 +37653,7 @@
 	});
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var AppDispatcher = __webpack_require__(190),
@@ -37684,7 +37685,7 @@
 	module.exports = KeyActions;
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports) {
 
 	var TONES = {
@@ -37795,7 +37796,7 @@
 	module.exports = TONES;
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports) {
 
 	var KeyMapping = {
@@ -37822,7 +37823,7 @@
 	module.exports = KeyMapping;
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports) {
 
 	var RevKeyMapping = {
