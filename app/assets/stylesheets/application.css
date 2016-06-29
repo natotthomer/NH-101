@@ -3,9 +3,15 @@
 *= require_self
 */
 
-div, body, p, article, section, h1, a {
+div, body, p, article, section, h1, a, header {
   box-sizing: border-box;
-  font-family: inherit;
+  font-family: Michroma;
+  background: #fcfefb;
+  background: #999998;
+}
+
+header {
+  /*background: #fcfefb;*/
 }
 
 body {
@@ -14,7 +20,7 @@ body {
 }
 
 .main {
-  background: #999998;
+  /*background: #999998;*/
 }
 
 .header {
@@ -28,10 +34,9 @@ body {
   margin: auto;
   padding-top: 40px;
   padding-bottom: 40px;
-  margin-top: 40px;
+  /*margin-top: 40px;*/
   text-align: center;
-  background: #999998;
-
+  /*background: #999998;*/
 }
 
 .synth-key {
@@ -93,13 +98,16 @@ body {
   padding-top: 15px;
   text-align: center;
   text-transform: uppercase;
+  font-family: Michroma;
+  font-weight: bold;
+  /*background: #fcfefb;*/
 }
 
 .instructions {
   width: 900px;
   height: 200px;
   margin: auto;
-  background: #999998;
+  /*background: #999998;*/
 }
 
 .img-holder {
@@ -122,6 +130,65 @@ body {
   padding-bottom: 10px;
 }
 
+.personal-detail {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
 .personal-details a:hover {
   text-decoration: underline;
+}
+
+.slider-container {
+  /*position: relative;*/
+  display: inline;
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 70px;
+  height: 100px;
+  text-align: center;
+}
+
+.slider-sub-container {
+  position: relative;
+  width: 70px;
+  height: 100px;
+}
+
+.param-slider {
+  position: absolute;
+  /*margin-top: 40px;
+  margin-right: 50px;*/
+  top: 80px;
+  left: -7.5px;
+  transform: rotateZ(-90deg);
+  width: 85px;
+}
+
+.slider-first-group {
+  height: 80px;
+  margin-left: 61px;
+}
+
+.slider-second-group {
+  margin-left: 95px;
+  margin-bottom: 30px;
+}
+
+.slider-group {
+  margin: auto;
+  text-align: center;
+  width: 700px;
+  padding-left: 40px;
+}
+
+.slider-label {
+  position: absolute;
+  font-size: 12px;
+  text-align: center;
+  width: 70px;
+}
+
+.filler {
 }

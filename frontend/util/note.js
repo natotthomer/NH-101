@@ -1,4 +1,5 @@
 var ctx = new (window.AudioContext || window.webkitAudioContext)();
+var WAVES = require('../constants/waves');
 
 // Main oscillators — Sawtooth, Square and Triangle
 // Sawtooth detuned 101% of input frequency
@@ -9,9 +10,8 @@ var ctx = new (window.AudioContext || window.webkitAudioContext)();
 var createSawOscillator = function (freq) {
   var osc = ctx.createOscillator();
   osc.type = "sawtooth";
-  osc.frequency.value = freq * 1.008;
-  osc.detune.value = 0;
-  // osc.start();
+  osc.frequency.value = freq;
+  osc.frequency.detune = 8;
   return osc;
 };
 
@@ -25,8 +25,7 @@ var createSquareOscillator = function (freq) {
   var osc = ctx.createOscillator();
   osc.type = "square";
   osc.frequency.value = freq * 0.992;
-  osc.detune.value = 0;
-  // osc.start();
+  osc.detune.value = -8;
   return osc;
 };
 
@@ -38,7 +37,7 @@ var createSquareGainNode = function () {
 
 var createTriOscillator = function (freq) {
   var osc = ctx.createOscillator();
-  osc.type = "square";
+  osc.type = "triangle";
   osc.frequency.value = freq * 1.0;
   osc.detune.value = 0;
   // osc.start();
@@ -62,6 +61,15 @@ var createLowpassFilter = function (cutoff, Q) {
   return lowpassFilter;
 };
 
+var createHighpassFilter = function (cutoff) {
+  var highpassFilter = ctx.createBiquadFilter();
+  highpassFilter.type = 'highpass';
+  highpassFilter.gain.value = 1;
+  highpassFilter.Q.value = 0;
+  highpassFilter.frequency.value = 10000;
+  return highpassFilter;
+};
+
 // Builds Master Gain Node
 
 var createMasterGainNode = function () {
@@ -73,33 +81,52 @@ var createMasterGainNode = function () {
 
 // Builds LFO and corresponding gain node
 
-var createLFO = function () {
+var createLFO = function (freq) {
   var osc = ctx.createOscillator();
+  osc.frequency.value = freq;
   osc.type = 'sine';
-  osc.frequency.value = 4;
   osc.start();
   return osc;
 };
 
-var createLFOGain = function () {
+var createLFOGain = function (gain) {
   var gainNode = ctx.createGain();
-  gainNode.gain.value = 1;
+  gainNode.gain.value = gain;
+  return gainNode;
+};
+
+var createSubOsc = function (freq) {
+  var osc = createSquareOscillator(freq / 2);
+  osc.detune.value = 0;
+  osc.type = "square";
+  return osc;
+};
+
+var createSubGainNode = function () {
+  var gainNode = ctx.createGain();
+  gainNode.gain.value = 0;
   return gainNode;
 };
 
 // Builds a note and a set of oscillators, filter and gain for each
 
-var Note = function (freq, vol, cutoff, Q, filterLFOAmount) {
+var Note = function (freq, vol, cutoff, Q, filterLFOAmount, filterLFOSpeed, filterLFOWave, ampLFOAmount, ampLFOSpeed, ampLFOWave, hpf) {
   this.masterGain = createMasterGainNode();
   this.masterGain.gain.value = vol;
   this.lowpassFilter = createLowpassFilter(cutoff, Q);
   this.lowpassFilter.connect(this.masterGain);
+  this.highpassFilter = createHighpassFilter(hpf);
+  this.highpassFilter.connect(this.masterGain);
 
-  this.lfo = createLFO();
-  // this.lfoGain = createLFOGain();
-  this.lfo.connect(this.lowpassFilter.detune);
-  // this.lfoGain.connect(this.lowpassFilter.detune);
-  // debugger;
+  this.lfo1 = createLFO(filterLFOSpeed, filterLFOWave);
+  this.lfo1Gain = createLFOGain(filterLFOAmount);
+  this.lfo1.connect(this.lfo1Gain);
+  this.lfo1Gain.connect(this.lowpassFilter.detune);
+
+  this.lfo2 = createLFO(ampLFOSpeed, ampLFOWave);
+  this.lfo2Gain = createLFOGain(ampLFOAmount);
+  this.lfo2.connect(this.lfo2Gain);
+  this.lfo2Gain.connect(this.masterGain.gain);
 
   this.sawNode = createSawOscillator(freq);
   this.sawGain = createSawGainNode();
@@ -116,25 +143,51 @@ var Note = function (freq, vol, cutoff, Q, filterLFOAmount) {
   this.triGain.connect(this.lowpassFilter);
   this.triNode.connect(this.triGain);
 
+  this.subNode = createSubOsc(freq);
+  this.subGain = createSubGainNode();
+  this.subGain.connect(this.lowpassFilter);
+  this.subNode.connect(this.subGain);
+
   this.sawNode.start();
   this.squareNode.start();
   this.triNode.start();
+  this.subNode.start();
 };
 
 Note.prototype = {
-  start: function (startVol, sawVol, squareVol, triVol, filterLFOAmount) {
+  start: function (
+      startVol,
+      sawVol,
+      squareVol,
+      triVol,
+      filterLFOAmount,
+      filterLFOSpeed,
+      filterLFOWave,
+      subOscVol,
+      ampLFOAmount,
+      ampLFOSpeed,
+      ampLFOWave,
+      hpf
+    ) {
     this.sawGain.gain.value = sawVol;
     this.squareGain.gain.value = squareVol;
     this.triGain.gain.value = triVol;
     this.masterGain.gain.value = startVol;
-    // debugger;
-    // this.lfoGain.gain.value = filterLFOAmount;
+    this.lfo1Gain.gain.value = filterLFOAmount;
+    this.lfo1.frequency.value = filterLFOSpeed;
+    this.lfo1.type = WAVES[filterLFOWave];
+    this.subGain.gain.value = subOscVol;
+    this.lfo2Gain.gain.value = ampLFOAmount;
+    this.lfo2.frequency.value = ampLFOSpeed;
+    this.lfo2.type = WAVES[ampLFOWave];
+    this.highpassFilter.frequency.value = hpf;
   },
 
   stop: function () {
     this.sawNode.stop();
     this.squareNode.stop();
     this.triNode.stop();
+    this.subNode.stop();
   },
 
   changeMasterVol: function (newVol) {
@@ -161,11 +214,37 @@ Note.prototype = {
     this.triGain.gain.value = newTriVol;
   },
 
-  changeFilterLFOAmount: function (newLFOGain) {
-    // console.log(newLFOGain);
-    // this.lfoGain.gain.value = newLFOGain;
-    // console.log(this.lfoGain.gain.value);
-    // debugger;
+  changeFilterLFOAmount: function (newLFO1Gain) {
+    this.lfo1Gain.gain.value = newLFO1Gain;
+  },
+
+  changeFilterLFOSpeed: function (newFilterLFOSpeed) {
+    this.lfo1.frequency.value = newFilterLFOSpeed;
+  },
+
+  changeFilterLFOWave: function (newFilterLFOWave) {
+    this.lfo1.type = WAVES[newFilterLFOWave];
+  },
+
+  changeSubOscVol: function (newSubOscVol) {
+    this.subGain.gain.value = newSubOscVol;
+  },
+
+  changeAmpLFOAmount: function (newLFO2Gain) {
+    this.lfo2Gain.gain.value = newLFO2Gain;
+  },
+
+  changeAmpLFOSpeed: function (newLFO2Speed) {
+    this.lfo2.frequency.value = newLFO2Speed;
+  },
+
+  changeAmpLFOWave: function (newLFOWave) {
+    this.lfo2.type = WAVES[newLFOWave];
+  },
+
+  changeHPF: function (newHPF) {
+    this.highpassFilter.frequency.value = newHPF;
+    console.log(this.highpassFilter.frequency.value);
   }
 };
 

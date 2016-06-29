@@ -13,26 +13,33 @@ var SynthKey = React.createClass({
     this.note = new Note(this.makeNewFreq(),
       this.props.masterVolume,
       this.props.filterCutoff,
-      this.props.Q
+      this.props.Q,
+      this.props.filterLFOAmount,
+      this.props.filterLFOSpeed,
+      this.props.filterLFOWave,
+      this.props.ampLFOAmount,
+      this.props.ampLFOSpeed,
+      this.props.ampLFOWave,
+      this.props.hpf
     );
     KeyStore.addListener(this._onChange);
   },
 
   componentWillReceiveProps: function (newProps) {
-    var newVol = newProps.masterVolume;
-    var newCutoff = newProps.filterCutoff;
-    var newQ = newProps.Q;
-    var newSawVol = newProps.sawVol;
-    var newSquareVol = newProps.squareVol;
-    var newTriVol = newProps.triVol;
-    var newFilterLFOAmount = newProps.filterLFOAmount;
-    this.note.changeMasterVol(newVol);
-    this.note.changeFilterFreq(newCutoff);
-    this.note.changeResonance(newQ);
-    this.note.changeSawVol(newSawVol);
-    this.note.changeSquareVol(newSquareVol);
-    this.note.changeTriVol(newTriVol);
-    this.note.changeFilterLFOAmount(newFilterLFOAmount);
+    this.note.changeMasterVol(newProps.masterVolume);
+    this.note.changeFilterFreq(newProps.filterCutoff);
+    this.note.changeResonance(newProps.Q);
+    this.note.changeSawVol(newProps.sawVol);
+    this.note.changeSquareVol(newProps.squareVol);
+    this.note.changeTriVol(newProps.triVol);
+    this.note.changeFilterLFOAmount(newProps.filterLFOAmount);
+    this.note.changeFilterLFOSpeed(newProps.filterLFOSpeed);
+    this.note.changeFilterLFOWave(newProps.filterLFOWave);
+    this.note.changeSubOscVol(newProps.subOscVol);
+    this.note.changeAmpLFOAmount(newProps.ampLFOAmount);
+    this.note.changeAmpLFOSpeed(newProps.ampLFOSpeed);
+    this.note.changeAmpLFOWave(newProps.ampLFOWave);
+    this.note.changeHPF(newProps.hpf);
   },
 
   makeFullNoteName: function () {
@@ -72,26 +79,39 @@ var SynthKey = React.createClass({
     var pressed = this.thisKeyPressed();
 
     if (this.note) {
-
+      
       this.note.stop();
     }
     if (pressed) {
-      console.log("PRESSED")
+      console.log("PRESSED");
       this.note = new Note(
         this.makeNewFreq(),
         this.props.masterVolume,
         this.props.filterCutoff,
-        this.props.Q
+        this.props.Q,
+        this.props.filterLFOAmount,
+        this.props.filterLFOSpeed,
+        this.props.filterLFOWave,
+        this.props.ampLFOAmount,
+        this.props.ampLFOSpeed,
+        this.props.ampLFOWave,
+        this.props.hpf
       );
       this.note.start(
         this.props.masterVolume,
         this.props.sawVol,
         this.props.squareVol,
         this.props.triVol,
-        this.props.filterLFOAmount
+        this.props.filterLFOAmount,
+        this.props.filterLFOSpeed,
+        this.props.filterLFOWave,
+        this.props.subOscVol,
+        this.props.ampLFOAmount,
+        this.props.ampLFOSpeed,
+        this.props.ampLFOWave,
+        this.props.hpf
       );
     } else if (this.note) {
-      console.log("stopping");
       this.note.stop();
     }
     this.setState({ pressed: pressed });
