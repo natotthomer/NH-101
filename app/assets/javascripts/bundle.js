@@ -20838,7 +20838,7 @@
 	          { className: 'personal-detail' },
 	          React.createElement(
 	            'a',
-	            { href: 'natotthomer.com' },
+	            { href: 'http://www.natotthomer.com' },
 	            'Personal Site'
 	          )
 	        ),
@@ -20868,7 +20868,7 @@
 	          { className: 'personal-detail' },
 	          React.createElement(
 	            'a',
-	            { href: 'app/assets/images/NOH_Resume.pdf' },
+	            { href: 'app/assets/images/NOHresume62016.pdf' },
 	            'Resume'
 	          )
 	        ),

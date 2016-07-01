@@ -371,7 +371,7 @@ var Synth = React.createClass({
 
         <div className="personal-details">
           <span className="personal-detail">
-            <a href="natotthomer.com">Personal Site</a>
+            <a href="http://www.natotthomer.com">Personal Site</a>
           </span>&nbsp;&nbsp;&nbsp;
           <span className="personal-detail">
             <a href="https://github.com/natotthomer">GitHub</a>
@@ -380,7 +380,7 @@ var Synth = React.createClass({
             <a href="https://www.linkedin.com/in/nathanielotthomer">LinkedIn</a>
           </span>&nbsp;&nbsp;&nbsp;
           <span className="personal-detail">
-            <a href="app/assets/images/NOH_Resume.pdf">Resume</a>
+            <a href="app/assets/images/NOHresume62016.pdf">Resume</a>
           </span>&nbsp;&nbsp;&nbsp;
           <span className="personal-detail">
             <a href="mailto://nathaniel.ott.homer@gmail.com">Email</a>
