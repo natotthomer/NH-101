@@ -20518,7 +20518,7 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'Vol:',
+	                    'Volume',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20541,7 +20541,7 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'Cutoff:',
+	                    'Cutoff',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20564,7 +20564,7 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'Res:',
+	                    'Res',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20587,7 +20587,7 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'Saw:',
+	                    'Saw',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20610,7 +20610,7 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'Square:',
+	                    'Square',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20633,7 +20633,7 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'Tri:',
+	                    'Triangle',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20656,7 +20656,9 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'Sub:',
+	                    'Sub',
+	                    React.createElement('br', null),
+	                    'Osc',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20688,7 +20690,9 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'LFO 1 Int:',
+	                    'LFO 1',
+	                    React.createElement('br', null),
+	                    'Int',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20711,7 +20715,9 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'LFO 1 Rate:',
+	                    'LFO 1',
+	                    React.createElement('br', null),
+	                    'Rate',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20734,7 +20740,9 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'LFO 1 Wave:',
+	                    'LFO 1',
+	                    React.createElement('br', null),
+	                    'Wave',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20757,7 +20765,9 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'LFO 2 Int:',
+	                    'LFO 2',
+	                    React.createElement('br', null),
+	                    'Int',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20780,7 +20790,9 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'LFO 2 Rate:',
+	                    'LFO 2',
+	                    React.createElement('br', null),
+	                    'Rate  ',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20803,7 +20815,9 @@
 	                  React.createElement(
 	                    'p',
 	                    { className: 'slider-label' },
-	                    'LFO 2 Wave:',
+	                    'LFO 2',
+	                    React.createElement('br', null),
+	                    'Wave',
 	                    React.createElement('br', null)
 	                  ),
 	                  React.createElement('input', {
@@ -20824,6 +20838,11 @@
 	      React.createElement(
 	        'div',
 	        { className: 'instructions' },
+	        React.createElement(
+	          'div',
+	          { className: 'instructions-title' },
+	          'Instructions'
+	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'img-holder' },
@@ -20868,7 +20887,7 @@
 	          { className: 'personal-detail' },
 	          React.createElement(
 	            'a',
-	            { href: 'app/assets/images/NOHresume62016.pdf' },
+	            { href: 'http://www.natotthomer.com/NOHresume.pdf' },
 	            'Resume'
 	          )
 	        ),
@@ -28073,8 +28092,12 @@
 	    this.highpassFilter.frequency.value = newHPF;
 	    console.log(this.highpassFilter.frequency.value);
 	  }
+	
 	};
 	
+	// changeFM: function (newFMAmount) {
+	//   this.
+	// }
 	module.exports = Note;
 
 /***/ },

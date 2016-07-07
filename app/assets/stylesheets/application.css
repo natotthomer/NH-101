@@ -107,6 +107,7 @@ body {
   width: 900px;
   height: 200px;
   margin: auto;
+  margin-bottom: 10px;
   /*background: #999998;*/
 }
 
@@ -191,4 +192,9 @@ body {
 }
 
 .filler {
+}
+
+.instructions-title {
+  padding: 10px;
+  text-align: center;
 }

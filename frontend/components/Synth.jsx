@@ -149,7 +149,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      Vol:<br/>
+                      Volume<br/>
                     </p>
                     <input
                       id='master-volume'
@@ -165,7 +165,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      Cutoff:<br/>
+                      Cutoff<br/>
                     </p>
                     <input
                       id='filter-cutoff'
@@ -181,7 +181,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      Res:<br/>
+                      Res<br/>
                     </p>
                     <input
                       id='filter-resonance'
@@ -198,7 +198,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      Saw:<br/>
+                      Saw<br/>
                     </p>
                     <input
                       id='saw-vol'
@@ -214,7 +214,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      Square:<br/>
+                      Square<br/>
                     </p>
                     <input
                       id='square-vol'
@@ -230,7 +230,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      Tri:<br/>
+                      Triangle<br/>
                     </p>
                     <input
                       id='tri-vol'
@@ -246,7 +246,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      Sub:<br/>
+                      Sub<br/>Osc<br/>
                     </p>
                     <input
                       id='sub-osc-vol'
@@ -266,7 +266,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      LFO 1 Int:<br/>
+                      LFO 1<br/>Int<br/>
                     </p>
                     <input
                       id='filter-lfo-amount'
@@ -282,7 +282,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      LFO 1 Rate:<br/>
+                      LFO 1<br/>Rate<br/>
                     </p>
                     <input
                       id='filter-lfo-speed'
@@ -298,7 +298,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      LFO 1 Wave:<br/>
+                      LFO 1<br/>Wave<br/>
                     </p>
                     <input
                       id='filter-lfo-wave'
@@ -314,7 +314,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      LFO 2 Int:<br/>
+                      LFO 2<br/>Int<br/>
                     </p>
                     <input
                       id='amp-lfo-amount'
@@ -330,7 +330,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      LFO 2 Rate:<br/>
+                      LFO 2<br/>Rate  <br/>
                     </p>
                     <input
                       id='amp-lfo-speed'
@@ -346,7 +346,7 @@ var Synth = React.createClass({
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
                     <p className="slider-label">
-                      LFO 2 Wave:<br/>
+                      LFO 2<br/>Wave<br/>
                     </p>
                     <input
                       id='amp-lfo-wave'
@@ -364,6 +364,9 @@ var Synth = React.createClass({
           </div>
         </div>
         <div className="instructions">
+          <div className="instructions-title">
+            Instructions
+          </div>
           <div className="img-holder">
             <img src="app/assets/images/natkeyboard_text2.png" className="instructions-img"/>
           </div>
@@ -380,7 +383,7 @@ var Synth = React.createClass({
             <a href="https://www.linkedin.com/in/nathanielotthomer">LinkedIn</a>
           </span>&nbsp;&nbsp;&nbsp;
           <span className="personal-detail">
-            <a href="app/assets/images/NOHresume62016.pdf">Resume</a>
+            <a href="http://www.natotthomer.com/NOHresume.pdf">Resume</a>
           </span>&nbsp;&nbsp;&nbsp;
           <span className="personal-detail">
             <a href="mailto://nathaniel.ott.homer@gmail.com">Email</a>
