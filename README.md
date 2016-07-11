@@ -26,7 +26,7 @@ modulation.
 
 ### Wireframes
 
-[![NOH101](./docs/images/NOH101.png)]
+(./docs/images/NOH101.png)
 
 ### Timeline
 
