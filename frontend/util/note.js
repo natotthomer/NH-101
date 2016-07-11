@@ -40,7 +40,6 @@ var createTriOscillator = function (freq) {
   osc.type = "triangle";
   osc.frequency.value = freq * 1.0;
   osc.detune.value = 0;
-  // osc.start();
   return osc;
 };
 

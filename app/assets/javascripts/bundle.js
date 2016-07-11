@@ -20361,7 +20361,7 @@
 	  displayName: 'Synth',
 	
 	  componentDidMount: function () {
-	    KeyStore.addListener(this._onChange);
+	    // KeyStore.addListener(this._onChange);
 	    document.addEventListener("keypress", this.changeOctave);
 	    this.currentOctave = 4;
 	  },
@@ -20430,6 +20430,17 @@
 	    this.setState({ hpf: e.target.value });
 	  },
 	
+	  buildSlider: function (onChangeFunction, min, max, step, defaultValue) {
+	    return React.createElement('input', {
+	      type: 'range',
+	      min: min,
+	      max: max,
+	      step: step,
+	      defaultValue: defaultValue,
+	      onChange: onChangeFunction,
+	      className: 'param-slider' });
+	  },
+	
 	  getInitialState: function () {
 	    return {
 	      notes: KeyStore.all(),
@@ -20453,20 +20464,7 @@
 	
 	  render: function () {
 	    var noteName;
-	    var vol = this.state.masterVolume;
-	    var cutoff = this.state.filterCutoff;
-	    var Q = this.state.Q;
-	    var sawVol = this.state.sawVol;
-	    var squareVol = this.state.squareVol;
-	    var triVol = this.state.triVol;
-	    var filterLFOAmount = this.state.filterLFOAmount;
-	    var filterLFOSpeed = this.state.filterLFOSpeed;
-	    var filterLFOWave = this.state.filterLFOWave;
-	    var subOscVol = this.state.subOscVol;
-	    var ampLFOAmount = this.state.ampLFOAmount;
-	    var ampLFOSpeed = this.state.ampLFOSpeed;
-	    var ampLFOWave = this.state.ampLFOWave;
-	    var hpf = this.state.hpf;
+	
 	    return React.createElement(
 	      'div',
 	      { className: 'main' },
@@ -20478,25 +20476,7 @@
 	          { className: 'keys group' },
 	          KeyCodes.map(function (keyCode, index) {
 	            noteName = FullKeyMapping[keyCode][this.state.currentOctave].slice(0, -1);
-	            return React.createElement(SynthKey, {
-	              noteName: noteName,
-	              key: index,
-	              keyCode: keyCode,
-	              currentOctave: this.state.currentOctave,
-	              masterVolume: vol,
-	              filterCutoff: cutoff,
-	              Q: Q,
-	              sawVol: sawVol,
-	              squareVol: squareVol,
-	              triVol: triVol,
-	              filterLFOAmount: filterLFOAmount,
-	              filterLFOSpeed: filterLFOSpeed,
-	              filterLFOWave: filterLFOWave,
-	              subOscVol: subOscVol,
-	              ampLFOAmount: ampLFOAmount,
-	              ampLFOSpeed: ampLFOSpeed,
-	              ampLFOWave: ampLFOWave,
-	              hpf: hpf });
+	            return React.createElement(SynthKey, { keyParams: this.state, noteName: noteName, key: index, keyCode: keyCode });
 	          }.bind(this))
 	        ),
 	        React.createElement('br', null),
@@ -20521,15 +20501,7 @@
 	                    'Volume',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'master-volume',
-	                    type: 'range',
-	                    min: '0',
-	                    max: '1',
-	                    step: '0.01',
-	                    defaultValue: '0.2',
-	                    onChange: this.handleMasterVolChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleMasterVolChange, 0, 1, 0.01, 0.2)
 	                )
 	              ),
 	              React.createElement(
@@ -20544,15 +20516,7 @@
 	                    'Cutoff',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'filter-cutoff',
-	                    type: 'range',
-	                    min: '50',
-	                    max: '15000',
-	                    step: '50',
-	                    defaultValue: '2000',
-	                    onChange: this.handleFilterCutoff,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleFilterCutoff, 50, 15000, 50, 2000)
 	                )
 	              ),
 	              React.createElement(
@@ -20567,15 +20531,7 @@
 	                    'Res',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'filter-resonance',
-	                    type: 'range',
-	                    min: '0.1',
-	                    max: '40',
-	                    step: '.1',
-	                    defaultValue: '0',
-	                    onChange: this.handleFilterResonance,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleFilterResonance, 0.1, 40, 0.1, 0)
 	                )
 	              ),
 	              React.createElement(
@@ -20590,15 +20546,7 @@
 	                    'Saw',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'saw-vol',
-	                    type: 'range',
-	                    min: '0',
-	                    max: '1',
-	                    step: '.001',
-	                    defaultValue: '0.2',
-	                    onChange: this.handleSawVolChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleSawVolChange, 0, 1, 0.01, 0.2)
 	                )
 	              ),
 	              React.createElement(
@@ -20613,15 +20561,7 @@
 	                    'Square',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'square-vol',
-	                    type: 'range',
-	                    min: '0',
-	                    max: '1',
-	                    step: '.001',
-	                    defaultValue: '0.2',
-	                    onChange: this.handleSquareVolChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleSquareVolChange, 0, 1, 0.01, 0.2)
 	                )
 	              ),
 	              React.createElement(
@@ -20636,15 +20576,7 @@
 	                    'Triangle',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'tri-vol',
-	                    type: 'range',
-	                    min: '0',
-	                    max: '1',
-	                    step: '.001',
-	                    defaultValue: '0.2',
-	                    onChange: this.handleTriVolChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleTriVolChange, 0, 1, 0.01, 0.2)
 	                )
 	              ),
 	              React.createElement(
@@ -20661,15 +20593,7 @@
 	                    'Osc',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'sub-osc-vol',
-	                    type: 'range',
-	                    min: '0',
-	                    max: '0.8',
-	                    step: '0.001',
-	                    defaultValue: '0',
-	                    onChange: this.handleSubOscVolChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleSubOscVolChange, 0, 0.8, 0.01, 0)
 	                )
 	              )
 	            )
@@ -20695,15 +20619,7 @@
 	                    'Int',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'filter-lfo-amount',
-	                    type: 'range',
-	                    min: '0',
-	                    max: '5000',
-	                    step: '.01',
-	                    defaultValue: '0',
-	                    onChange: this.handleFilterLFOAmountChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleFilterLFOAmountChange, 0, 5000, 0.01, 0)
 	                )
 	              ),
 	              React.createElement(
@@ -20720,15 +20636,7 @@
 	                    'Rate',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'filter-lfo-speed',
-	                    type: 'range',
-	                    min: '0.1',
-	                    max: '50',
-	                    step: '0.1',
-	                    defaultValue: '0',
-	                    onChange: this.handleFilterLFOSpeedChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleFilterLFOSpeedChange, 0.1, 50, 0.1, 0)
 	                )
 	              ),
 	              React.createElement(
@@ -20745,15 +20653,7 @@
 	                    'Wave',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'filter-lfo-wave',
-	                    type: 'range',
-	                    min: '0',
-	                    max: '3',
-	                    step: '1',
-	                    defaultValue: '0',
-	                    onChange: this.handleFilterLFOWaveChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleFilterLFOWaveChange, 0, 3, 1, 0)
 	                )
 	              ),
 	              React.createElement(
@@ -20770,15 +20670,7 @@
 	                    'Int',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'amp-lfo-amount',
-	                    type: 'range',
-	                    min: '0',
-	                    max: '2',
-	                    step: '.01',
-	                    defaultValue: '0',
-	                    onChange: this.handleAmpLFOAmountChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleAmpLFOAmountChange, 0, 2, 0.01, 0)
 	                )
 	              ),
 	              React.createElement(
@@ -20795,15 +20687,7 @@
 	                    'Rate  ',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'amp-lfo-speed',
-	                    type: 'range',
-	                    min: '0.1',
-	                    max: '25',
-	                    step: '0.1',
-	                    defaultValue: '0',
-	                    onChange: this.handleAmpLFOSpeedChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleAmpLFOSpeedChange, 0.1, 25, 0.1, 0.1)
 	                )
 	              ),
 	              React.createElement(
@@ -20820,15 +20704,7 @@
 	                    'Wave',
 	                    React.createElement('br', null)
 	                  ),
-	                  React.createElement('input', {
-	                    id: 'amp-lfo-wave',
-	                    type: 'range',
-	                    min: '0',
-	                    max: '3',
-	                    step: '1',
-	                    defaultValue: '0',
-	                    onChange: this.handleAmpLFOWaveChange,
-	                    className: 'param-slider' })
+	                  this.buildSlider(this.handleAmpLFOWaveChange, 0, 3, 1, 0)
 	                )
 	              )
 	            )
@@ -20903,28 +20779,13 @@
 	        )
 	      )
 	    );
-	  },
-	
-	  _onChange: function () {
-	    this.setState({ notes: KeyStore.all() });
 	  }
+	
 	});
 	
-	// <div className="slider-container">
-	//   <p className="slider-label">
-	//     HPF:<br/>
-	//   </p>
-	//   <input
-	//     id='hpf'
-	//     type="range"
-	//     min="200"
-	//     max="20000"
-	//     step="1"
-	//     defaultValue="200"
-	//     onChange={this.handleHPFChange}
-	//     className="param-slider"/>
-	// </div>
-	
+	// _onChange: function () {
+	//   this.setState({notes: KeyStore.all()});
+	// }
 	module.exports = Synth;
 
 /***/ },
@@ -20945,32 +20806,32 @@
 	
 	  componentDidMount: function () {
 	    this.makeFullNoteName();
-	    this.note = new Note(this.makeNewFreq(), this.props.masterVolume, this.props.filterCutoff, this.props.Q, this.props.filterLFOAmount, this.props.filterLFOSpeed, this.props.filterLFOWave, this.props.ampLFOAmount, this.props.ampLFOSpeed, this.props.ampLFOWave, this.props.hpf);
+	    this.note = new Note(this.makeNewFreq(), this.props.keyParams.masterVolume, this.props.keyParams.filterCutoff, this.props.keyParams.Q, this.props.keyParams.filterLFOAmount, this.props.keyParams.filterLFOSpeed, this.props.keyParams.filterLFOWave, this.props.keyParams.ampLFOAmount, this.props.keyParams.ampLFOSpeed, this.props.keyParams.ampLFOWave, this.props.keyParams.hpf);
 	    KeyStore.addListener(this._onChange);
 	  },
 	
 	  componentWillReceiveProps: function (newProps) {
-	    this.note.changeMasterVol(newProps.masterVolume);
-	    this.note.changeFilterFreq(newProps.filterCutoff);
-	    this.note.changeResonance(newProps.Q);
-	    this.note.changeSawVol(newProps.sawVol);
-	    this.note.changeSquareVol(newProps.squareVol);
-	    this.note.changeTriVol(newProps.triVol);
-	    this.note.changeFilterLFOAmount(newProps.filterLFOAmount);
-	    this.note.changeFilterLFOSpeed(newProps.filterLFOSpeed);
-	    this.note.changeFilterLFOWave(newProps.filterLFOWave);
-	    this.note.changeSubOscVol(newProps.subOscVol);
-	    this.note.changeAmpLFOAmount(newProps.ampLFOAmount);
-	    this.note.changeAmpLFOSpeed(newProps.ampLFOSpeed);
-	    this.note.changeAmpLFOWave(newProps.ampLFOWave);
-	    this.note.changeHPF(newProps.hpf);
+	    this.note.changeMasterVol(newProps.keyParams.masterVolume);
+	    this.note.changeFilterFreq(newProps.keyParams.filterCutoff);
+	    this.note.changeResonance(newProps.keyParams.Q);
+	    this.note.changeSawVol(newProps.keyParams.sawVol);
+	    this.note.changeSquareVol(newProps.keyParams.squareVol);
+	    this.note.changeTriVol(newProps.keyParams.triVol);
+	    this.note.changeFilterLFOAmount(newProps.keyParams.filterLFOAmount);
+	    this.note.changeFilterLFOSpeed(newProps.keyParams.filterLFOSpeed);
+	    this.note.changeFilterLFOWave(newProps.keyParams.filterLFOWave);
+	    this.note.changeSubOscVol(newProps.keyParams.subOscVol);
+	    this.note.changeAmpLFOAmount(newProps.keyParams.ampLFOAmount);
+	    this.note.changeAmpLFOSpeed(newProps.keyParams.ampLFOSpeed);
+	    this.note.changeAmpLFOWave(newProps.keyParams.ampLFOWave);
+	    this.note.changeHPF(newProps.keyParams.hpf);
 	  },
 	
 	  makeFullNoteName: function () {
 	    if ([75, 79, 76, 80, 186, 222].includes(this.props.keyCode)) {
-	      this.fullNoteName = this.props.noteName + (this.props.currentOctave + 1);
+	      this.fullNoteName = this.props.noteName + (this.props.keyParams.currentOctave + 1);
 	    } else {
-	      this.fullNoteName = this.props.noteName + this.props.currentOctave;
+	      this.fullNoteName = this.props.noteName + this.props.keyParams.currentOctave;
 	    }
 	  },
 	
@@ -20991,9 +20852,9 @@
 	  makeNewFreq: function () {
 	    var newFreq;
 	    if ([75, 79, 76, 80, 186, 222].includes(this.props.keyCode)) {
-	      newFreq = MORETONES[this.props.noteName] * Math.pow(2, this.props.currentOctave + 1);
+	      newFreq = MORETONES[this.props.noteName] * Math.pow(2, this.props.keyParams.currentOctave + 1);
 	    } else {
-	      newFreq = MORETONES[this.props.noteName] * Math.pow(2, this.props.currentOctave);
+	      newFreq = MORETONES[this.props.noteName] * Math.pow(2, this.props.keyParams.currentOctave);
 	    }
 	
 	    return newFreq;
@@ -21008,8 +20869,8 @@
 	    }
 	    if (pressed) {
 	      console.log("PRESSED");
-	      this.note = new Note(this.makeNewFreq(), this.props.masterVolume, this.props.filterCutoff, this.props.Q, this.props.filterLFOAmount, this.props.filterLFOSpeed, this.props.filterLFOWave, this.props.ampLFOAmount, this.props.ampLFOSpeed, this.props.ampLFOWave, this.props.hpf);
-	      this.note.start(this.props.masterVolume, this.props.sawVol, this.props.squareVol, this.props.triVol, this.props.filterLFOAmount, this.props.filterLFOSpeed, this.props.filterLFOWave, this.props.subOscVol, this.props.ampLFOAmount, this.props.ampLFOSpeed, this.props.ampLFOWave, this.props.hpf);
+	      this.note = new Note(this.makeNewFreq(), this.props.keyParams.masterVolume, this.props.keyParams.filterCutoff, this.props.keyParams.Q, this.props.keyParams.filterLFOAmount, this.props.keyParams.filterLFOSpeed, this.props.keyParams.filterLFOWave, this.props.keyParams.ampLFOAmount, this.props.keyParams.ampLFOSpeed, this.props.keyParams.ampLFOWave, this.props.keyParams.hpf);
+	      this.note.start(this.props.keyParams.masterVolume, this.props.keyParams.sawVol, this.props.keyParams.squareVol, this.props.keyParams.triVol, this.props.keyParams.filterLFOAmount, this.props.keyParams.filterLFOSpeed, this.props.keyParams.filterLFOWave, this.props.keyParams.subOscVol, this.props.keyParams.ampLFOAmount, this.props.keyParams.ampLFOSpeed, this.props.keyParams.ampLFOWave, this.props.keyParams.hpf);
 	    } else if (this.note) {
 	      this.note.stop();
 	    }
@@ -27899,7 +27760,6 @@
 	  osc.type = "triangle";
 	  osc.frequency.value = freq * 1.0;
 	  osc.detune.value = 0;
-	  // osc.start();
 	  return osc;
 	};
 	

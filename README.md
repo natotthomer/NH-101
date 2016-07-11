@@ -17,12 +17,12 @@ modulation.
 
 ### MVP
 
-[ ] A clean, clear design that visually emulates the look of the Roland SH101 synthesiszer
-[ ] A single oscillator sound-source, with individual gain amounts for Square, Triange and Sawtooth waves
-[ ] The ability to play the instrument using the computer keyboard over a single octave (accidental keys too)
-[ ] A resonant lowpass filter
-[ ] A amplifier/gain control
-[ ] A triangle-wave LFO, linkable to both the filter cutoff and the amplifier gain
+- [ ] A clean, clear design that visually emulates the look of the Roland SH101 synthesiszer
+- [ ] A single oscillator sound-source, with individual gain amounts for Square, Triange and Sawtooth waves
+- [ ] The ability to play the instrument using the computer keyboard over a single octave (accidental keys too)
+- [ ] A resonant lowpass filter
+- [ ] A amplifier/gain control
+- [ ] A triangle-wave LFO, linkable to both the filter cutoff and the amplifier gain
 
 ### Wireframes
 
@@ -32,35 +32,31 @@ modulation.
 
 #### Phase 1: Basic VCO & Keyboard
 
-[ ] Build out keyboard
-[ ] Single sound-source
+- [x] Build out keyboard
+- [x] Single sound-source
 
 ##### Phase 2: Basic interface
 
-[ ] Keyboard interface
-[ ] Master Volume slider
+- [x] Keyboard interface
+- [x] Master Volume slider
 
 ##### Phase 3: Basic oscillator mixer
 
-[ ] Gain sliders for Tri, Saw, & Square
+- [x] Gain sliders for Tri, Saw, & Square
 
 ##### Phase 4: Filter
 
-[ ] Attach basic lowpass filter
+- [x] Attach basic lowpass filter
 
 ##### Phase 5: Wrap Up interface
 
-[ ] CSS
-[ ] Better design
+- [x] CSS
+- [x] Better design
 
 ##### Bonus Features:
 
-[ ] Step sequencer
-[ ] Basic drum loops (Casio samples??)
-[ ] Tempo knob
-[ ] Volume knob
-[ ] Sub-oscillator
-[ ] Arpeggiator
-[ ] ADSR envelope
-[ ] LFO
-[ ] Resonance on filter
+- [x] Sub-oscillator
+- [ ] Arpeggiator
+- [ ] ADSR envelope
+- [x] LFO
+- [x] Resonance on filter
