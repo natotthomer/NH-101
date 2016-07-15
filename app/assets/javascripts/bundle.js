@@ -20430,7 +20430,7 @@
 	    this.setState({ hpf: e.target.value });
 	  },
 	
-	  buildSlider: function (onChangeFunction, min, max, step, defaultValue) {
+	  buildSlider: function (onChangeFunction, min, max, step, defaultValue, tooltip) {
 	    return React.createElement('input', {
 	      type: 'range',
 	      min: min,
@@ -20438,7 +20438,8 @@
 	      step: step,
 	      defaultValue: defaultValue,
 	      onChange: onChangeFunction,
-	      className: 'param-slider' });
+	      className: 'param-slider'
+	    });
 	  },
 	
 	  getInitialState: function () {
@@ -20464,7 +20465,6 @@
 	
 	  render: function () {
 	    var noteName;
-	
 	    return React.createElement(
 	      'div',
 	      { className: 'main' },
@@ -20497,11 +20497,15 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Adjusts the total volume' },
 	                    'Volume',
 	                    React.createElement('br', null)
 	                  ),
-	                  this.buildSlider(this.handleMasterVolChange, 0, 1, 0.01, 0.2)
+	                  React.createElement(
+	                    'div',
+	                    { className: 'slider-sub-sub-container' },
+	                    this.buildSlider(this.handleMasterVolChange, 0, 1, 0.01, 0.2)
+	                  )
 	                )
 	              ),
 	              React.createElement(
@@ -20512,7 +20516,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Adjusts the brightness' },
 	                    'Cutoff',
 	                    React.createElement('br', null)
 	                  ),
@@ -20527,7 +20531,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Increases the emphasis of the cutoff' },
 	                    'Res',
 	                    React.createElement('br', null)
 	                  ),
@@ -20542,7 +20546,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Volume for sawtooth wave oscillator' },
 	                    'Saw',
 	                    React.createElement('br', null)
 	                  ),
@@ -20557,7 +20561,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Volume for square wave oscillator' },
 	                    'Square',
 	                    React.createElement('br', null)
 	                  ),
@@ -20572,7 +20576,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Volume for triangle wave oscillator' },
 	                    'Triangle',
 	                    React.createElement('br', null)
 	                  ),
@@ -20587,7 +20591,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Volume for sub oscillator (one octave below)' },
 	                    'Sub',
 	                    React.createElement('br', null),
 	                    'Osc',
@@ -20613,7 +20617,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Adjusts intensity for cyclical modulation of cutoff' },
 	                    'LFO 1',
 	                    React.createElement('br', null),
 	                    'Int',
@@ -20630,7 +20634,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Adjusts rate of cyclical modulation of cutoff' },
 	                    'LFO 1',
 	                    React.createElement('br', null),
 	                    'Rate',
@@ -20647,7 +20651,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Adjusts wave type of cyclical modulation of cutoff' },
 	                    'LFO 1',
 	                    React.createElement('br', null),
 	                    'Wave',
@@ -20664,7 +20668,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Adjusts intensity of cyclical modulation of master volume' },
 	                    'LFO 2',
 	                    React.createElement('br', null),
 	                    'Int',
@@ -20681,7 +20685,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Adjusts rate of cyclical modulation of master volume' },
 	                    'LFO 2',
 	                    React.createElement('br', null),
 	                    'Rate  ',
@@ -20698,7 +20702,7 @@
 	                  { className: 'slider-sub-container clearfix' },
 	                  React.createElement(
 	                    'p',
-	                    { className: 'slider-label' },
+	                    { className: 'slider-label', title: 'Adjusts wave type of cyclical modulation of master volume' },
 	                    'LFO 2',
 	                    React.createElement('br', null),
 	                    'Wave',
@@ -20717,7 +20721,13 @@
 	        React.createElement(
 	          'div',
 	          { className: 'instructions-title' },
-	          'Instructions'
+	          'Instructions:'
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'instructions-text' },
+	          'Hover over slider labels for details! Play the highlighted keys to make sounds!',
+	          React.createElement('br', null)
 	        ),
 	        React.createElement(
 	          'div',
@@ -20725,6 +20735,8 @@
 	          React.createElement('img', { src: 'app/assets/images/natkeyboard_text2.png', className: 'instructions-img' })
 	        )
 	      ),
+	      React.createElement('br', null),
+	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
 	        { className: 'personal-details' },

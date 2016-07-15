@@ -11,7 +11,7 @@ div, body, p, article, section, h1, a, header {
 }
 
 header {
-  /*background: #fcfefb;*/
+
 }
 
 body {
@@ -20,7 +20,7 @@ body {
 }
 
 .main {
-  /*background: #999998;*/
+
 }
 
 .header {
@@ -34,15 +34,13 @@ body {
   margin: auto;
   padding-top: 40px;
   padding-bottom: 40px;
-  /*margin-top: 40px;*/
   text-align: center;
-  /*background: #999998;*/
 }
 
 .synth-key {
   float: left;
   width: 50px;
-  height: 240px;
+  height: 175px;
   border: 1px solid #555555;
   background-color: white;
   transition: background-color 0.25s;
@@ -53,7 +51,7 @@ body {
 .synth-key-black {
   float: left;
   width: 27px;
-  height: 150px;
+  height: 110px;
   transform: translateX(-50%);
   border: 1px solid #555555;
   background-color: black;
@@ -100,15 +98,6 @@ body {
   text-transform: uppercase;
   font-family: Michroma;
   font-weight: bold;
-  /*background: #fcfefb;*/
-}
-
-.instructions {
-  width: 900px;
-  height: 200px;
-  margin: auto;
-  margin-bottom: 10px;
-  /*background: #999998;*/
 }
 
 .img-holder {
@@ -116,32 +105,7 @@ body {
   padding-left: 98px;
 }
 
-.instructions-img {
-  /*-webkit-border-image: -webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00)) 21 30 30 21 repeat repeat;*/
-  border: 2px solid #ffffff;
-  box-shadow: 15px #999998;
-  width: 700px;
-  margin: auto;
-  border-radius: 8px;
-  /*height: 100%;*/
-}
-
-.personal-details {
-  text-align: center;
-  padding-bottom: 10px;
-}
-
-.personal-detail {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
-.personal-details a:hover {
-  text-decoration: underline;
-}
-
 .slider-container {
-  /*position: relative;*/
   display: inline;
   float: left;
   padding-left: 5px;
@@ -157,10 +121,13 @@ body {
   height: 100px;
 }
 
+.slider-sub-sub-container {
+  height: 83px;
+  margin: auto;
+}
+
 .param-slider {
   position: absolute;
-  /*margin-top: 40px;
-  margin-right: 50px;*/
   top: 80px;
   left: -7.5px;
   transform: rotateZ(-90deg);
@@ -185,16 +152,117 @@ body {
 }
 
 .slider-label {
-  position: absolute;
+  display: inline;
+  position: relative;
   font-size: 12px;
   text-align: center;
   width: 70px;
 }
 
+.slider-label:hover:after{
+    background: #000;
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(title);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+}
+
+.slider-label:hover:before{
+    border: solid;
+    border-color: #000 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}
+
 .filler {
+}
+
+/*.slider-sub-container {
+  width: 70px;
+}*/
+
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    /*fix for FF unable to apply focus style bug */
+    border: 2px solid #444;
+    border-radius: 0px;
+    /*required for proper track sizing in FF*/
+    width: 85px;
+    margin-left: -1px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 85px;
+    height: 9px;
+    background: #aaa;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 25px;
+    width: 10px;
+    background: #444;
+    border: solid 2px #666;
+    margin-top: -8.5px;
+    border-radius: 40%;
+}
+/*
+input[type=range]:focus {
+    outline: none;
+}*/
+
+input[type=range]:focus {
+    border: solid 2px black;
+}
+
+/* Instructions */
+
+.instructions {
+  width: 900px;
+  height: 200px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.instructions-text {
+  font-size: 12px;
+  text-align: center;
+}
+
+.instructions-img {
+  border: 2px solid #ffffff;
+  box-shadow: 15px #999998;
+  width: 700px;
+  margin: auto;
+  border-radius: 8px;
 }
 
 .instructions-title {
   padding: 10px;
   text-align: center;
+}
+
+.personal-details {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.personal-detail {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.personal-details a:hover {
+  text-decoration: underline;
 }
