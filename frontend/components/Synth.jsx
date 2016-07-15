@@ -75,7 +75,7 @@ var Synth = React.createClass({
     this.setState({ hpf: e.target.value });
   },
 
-  buildSlider: function(onChangeFunction, min, max, step, defaultValue) {
+  buildSlider: function(onChangeFunction, min, max, step, defaultValue, tooltip) {
     return (
       <input
         type="range"
@@ -84,7 +84,8 @@ var Synth = React.createClass({
         step={step}
         defaultValue={defaultValue}
         onChange={onChangeFunction}
-        className="param-slider"/>
+        className="param-slider"
+        />
     );
   },
 
@@ -111,7 +112,6 @@ var Synth = React.createClass({
 
   render: function () {
     var noteName;
-
     return (
       <div className="main">
         <div className="synth">
@@ -130,17 +130,19 @@ var Synth = React.createClass({
               <div className="slider-first-group">
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Adjusts the total volume">
                       Volume<br/>
                     </p>
-                    {
-                      this.buildSlider(this.handleMasterVolChange, 0, 1, 0.01, 0.2)
-                    }
+                    <div className="slider-sub-sub-container">
+                      {
+                        this.buildSlider(this.handleMasterVolChange, 0, 1, 0.01, 0.2)
+                      }
+                    </div>
                   </div>
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Adjusts the brightness">
                       Cutoff<br/>
                     </p>
                     {
@@ -150,7 +152,7 @@ var Synth = React.createClass({
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Increases the emphasis of the cutoff">
                       Res<br/>
                     </p>
                     {
@@ -161,7 +163,7 @@ var Synth = React.createClass({
 
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Volume for sawtooth wave oscillator">
                       Saw<br/>
                     </p>
                     {
@@ -171,7 +173,7 @@ var Synth = React.createClass({
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Volume for square wave oscillator">
                       Square<br/>
                     </p>
                     {
@@ -181,7 +183,7 @@ var Synth = React.createClass({
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Volume for triangle wave oscillator">
                       Triangle<br/>
                     </p>
                     {
@@ -191,7 +193,7 @@ var Synth = React.createClass({
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label"  title="Volume for sub oscillator (one octave below)">
                       Sub<br/>Osc<br/>
                     </p>
                     {
@@ -205,7 +207,7 @@ var Synth = React.createClass({
               <div className="slider-second-group">
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Adjusts intensity for cyclical modulation of cutoff">
                       LFO 1<br/>Int<br/>
                     </p>
                     {
@@ -215,7 +217,7 @@ var Synth = React.createClass({
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Adjusts rate of cyclical modulation of cutoff">
                       LFO 1<br/>Rate<br/>
                     </p>
                     {
@@ -225,7 +227,7 @@ var Synth = React.createClass({
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Adjusts wave type of cyclical modulation of cutoff">
                       LFO 1<br/>Wave<br/>
                     </p>
                     {
@@ -235,7 +237,7 @@ var Synth = React.createClass({
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Adjusts intensity of cyclical modulation of master volume">
                       LFO 2<br/>Int<br/>
                     </p>
                     {
@@ -245,7 +247,7 @@ var Synth = React.createClass({
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Adjusts rate of cyclical modulation of master volume">
                       LFO 2<br/>Rate  <br/>
                     </p>
                     {
@@ -255,7 +257,7 @@ var Synth = React.createClass({
                 </div>
                 <div className="slider-container">
                   <div className="slider-sub-container clearfix">
-                    <p className="slider-label">
+                    <p className="slider-label" title="Adjusts wave type of cyclical modulation of master volume">
                       LFO 2<br/>Wave<br/>
                     </p>
                     {
@@ -269,12 +271,15 @@ var Synth = React.createClass({
         </div>
         <div className="instructions">
           <div className="instructions-title">
-            Instructions
+            Instructions:
+          </div>
+          <div className="instructions-text">
+            Hover over slider labels for details! Play the highlighted keys to make sounds!<br/>
           </div>
           <div className="img-holder">
             <img src="app/assets/images/natkeyboard_text2.png" className="instructions-img"/>
           </div>
-        </div>
+        </div><br/><br/>
 
         <div className="personal-details">
           <span className="personal-detail">
