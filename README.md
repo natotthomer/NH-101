@@ -26,7 +26,7 @@ modulation. jQuery handles key listeners for keyDown & keyUp actions, triggering
 
 ### Wireframes
 
-![NH101](./docs/images/main.jpg)
+![NH101](./app/assets/images/main.jpg)
 
 ### Timeline
 
