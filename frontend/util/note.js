@@ -243,7 +243,6 @@ Note.prototype = {
 
   changeHPF: function (newHPF) {
     this.highpassFilter.frequency.value = newHPF;
-    console.log(this.highpassFilter.frequency.value);
   },
 
   // changeFM: function (newFMAmount) {

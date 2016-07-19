@@ -13,20 +13,20 @@ more musical tone.
 JavaScript and React.js are the core of this project. I wanted to use the React.js library
 because it seemed to be a natural choice since there were a lot of moving parts and lot of
 changing parameters. I utilized the MDN Web Audio API to provide the core of the NH-101's sound generation and
-modulation.
+modulation. jQuery handles key listeners for keyDown & keyUp actions, triggering note on and off.
 
 ### MVP
 
-- [ ] A clean, clear design that visually emulates the look of the Roland SH101 synthesiszer
-- [ ] A single oscillator sound-source, with individual gain amounts for Square, Triange and Sawtooth waves
-- [ ] The ability to play the instrument using the computer keyboard over a single octave (accidental keys too)
-- [ ] A resonant lowpass filter
-- [ ] A amplifier/gain control
-- [ ] A triangle-wave LFO, linkable to both the filter cutoff and the amplifier gain
+- [x] A clean, clear design
+- [x] A single oscillator sound-source, with individual gain amounts for Square, Triange and Sawtooth waves
+- [x] The ability to play the instrument using the computer keyboard over a single octave (accidental keys too)
+- [x] A resonant lowpass filter
+- [x] A amplifier/gain control
+- [x] A triangle-wave LFO, linkable to both the filter cutoff and the amplifier gain
 
 ### Wireframes
 
-[![NOH101](./docs/images/NOH101.png)]
+![NH101](./docs/images/main.jpg)
 
 ### Timeline
 

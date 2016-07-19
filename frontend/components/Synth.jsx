@@ -84,8 +84,7 @@ var Synth = React.createClass({
         step={step}
         defaultValue={defaultValue}
         onChange={onChangeFunction}
-        className="param-slider"
-        />
+        className="param-slider"/>
     );
   },
 

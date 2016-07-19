@@ -26,8 +26,6 @@ KeyStore.__onDispatch = function (payload) {
 KeyStore._addKey = function (key) {
   var idx = _keys.indexOf(key);
   if (idx == -1) {
-    console.log("pushing key")
-    console.log(key);
     _keys.push(key);
     this.__emitChange();
   }

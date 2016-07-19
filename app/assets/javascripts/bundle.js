@@ -20438,8 +20438,7 @@
 	      step: step,
 	      defaultValue: defaultValue,
 	      onChange: onChangeFunction,
-	      className: 'param-slider'
-	    });
+	      className: 'param-slider' });
 	  },
 	
 	  getInitialState: function () {
@@ -20880,7 +20879,6 @@
 	      this.note.stop();
 	    }
 	    if (pressed) {
-	      console.log("PRESSED");
 	      this.note = new Note(this.makeNewFreq(), this.props.keyParams.masterVolume, this.props.keyParams.filterCutoff, this.props.keyParams.Q, this.props.keyParams.filterLFOAmount, this.props.keyParams.filterLFOSpeed, this.props.keyParams.filterLFOWave, this.props.keyParams.ampLFOAmount, this.props.keyParams.ampLFOSpeed, this.props.keyParams.ampLFOWave, this.props.keyParams.hpf);
 	      this.note.start(this.props.keyParams.masterVolume, this.props.keyParams.sawVol, this.props.keyParams.squareVol, this.props.keyParams.triVol, this.props.keyParams.filterLFOAmount, this.props.keyParams.filterLFOSpeed, this.props.keyParams.filterLFOWave, this.props.keyParams.subOscVol, this.props.keyParams.ampLFOAmount, this.props.keyParams.ampLFOSpeed, this.props.keyParams.ampLFOWave, this.props.keyParams.hpf);
 	    } else if (this.note) {
@@ -20924,8 +20922,6 @@
 	KeyStore._addKey = function (key) {
 	  var idx = _keys.indexOf(key);
 	  if (idx == -1) {
-	    console.log("pushing key");
-	    console.log(key);
 	    _keys.push(key);
 	    this.__emitChange();
 	  }
@@ -27962,7 +27958,6 @@
 	
 	  changeHPF: function (newHPF) {
 	    this.highpassFilter.frequency.value = newHPF;
-	    console.log(this.highpassFilter.frequency.value);
 	  }
 	
 	};

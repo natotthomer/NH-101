@@ -83,7 +83,6 @@ var SynthKey = React.createClass({
       this.note.stop();
     }
     if (pressed) {
-      console.log("PRESSED");
       this.note = new Note(
         this.makeNewFreq(),
         this.props.keyParams.masterVolume,
